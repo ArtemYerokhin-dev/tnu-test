@@ -1,7 +1,7 @@
-:root{--gold:#D9A33A}
+:root{--gold:#E8B53E}
 /* Золотий акцент: лінії й позначки, текст лишається чорним */
 .page-hero{border-bottom:3px solid var(--gold)}
-.page-hero .hero-badge{color:var(--gold);background:transparent;border:1px solid rgba(217,163,58,.6)}
+.page-hero .hero-badge{color:var(--gold);background:transparent;border:1px solid rgba(232,181,62,.6)}
 .hero-eyebrow{color:var(--gold)!important}
 .tab.on,.tab.active{border-bottom-color:var(--gold)!important}
 .stage.on{box-shadow:inset 0 3px 0 var(--gold)}
@@ -35,7 +35,7 @@
 .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
 .rv.in{opacity:1;transform:none}
 /* Цифри-факти */
-.facts-band{padding:56px 0 8px;background:#fff}
+.facts-band{padding:56px 0 80px;background:#fff}
 .fx-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .fx{border-top:3px solid var(--gold);padding-top:18px}
 .fx b{display:block;font-size:56px;font-weight:700;letter-spacing:-1.5px;line-height:1;color:var(--text);margin-bottom:10px}
@@ -47,5 +47,5 @@
 .qa-photo .qa-item{position:relative;min-height:150px;align-items:flex-end;justify-content:flex-start;padding:20px;border:0;border-bottom:3px solid var(--gold);border-radius:6px;color:#fff;font-size:15px;font-weight:600;background:linear-gradient(rgba(28,43,74,.35),rgba(28,43,74,.86)),var(--ph) center/cover no-repeat,var(--navy)}
 .qa-photo .qa-item .qa-arr{color:var(--gold)}
 .qa-photo .qa-item:hover{background:linear-gradient(rgba(28,43,74,.25),rgba(28,43,74,.8)),var(--ph) center/cover no-repeat,var(--navy)}
-@media(max-width:900px){.facts-band{padding-top:36px}.fx-grid{gap:14px}.fx{padding-top:12px}.fx b,.section-block .fx b{font-size:30px;letter-spacing:-.8px}.fx span{font-size:12.5px}.page-hero::after{display:none}.qa-photo .qa-item{min-height:110px;font-size:13px;padding:14px}}
+@media(max-width:900px){.facts-band{padding-top:36px;padding-bottom:48px}.fx-grid{gap:14px}.fx{padding-top:12px}.fx b,.section-block .fx b{font-size:30px;letter-spacing:-.8px}.fx span{font-size:12.5px}.page-hero::after{display:none}.qa-photo .qa-item{min-height:110px;font-size:13px;padding:14px}}
 @media(prefers-reduced-motion:reduce){.page-hero[style]::before,.mega-wrap.open{animation:none}.rv{opacity:1;transform:none;transition:none}.ccard:hover,.qa-item:hover{transform:none}.nav-item>a::after,.nav-item>button::after{transition:none}}
