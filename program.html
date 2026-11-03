@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Тест · Освітня програма — ТНУ</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1C2B4A;--gray:#F0F2F5;--white:#FFFFFF;--text:#1A1A1A;--muted:#6B7280;--border:#D8DCE4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.65;color:var(--text);background:#fff;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+.breadcrumb-bar{background:#fff;}
+.breadcrumb{height:40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--muted);transition:color .15s;}
+.breadcrumb a:hover{color:var(--text);text-decoration:underline;}
+.bc-sep{color:var(--border);}
+.bc-cur{color:var(--text);font-weight:500;}
+.prog-hero{background:var(--navy);padding:44px 0 40px;}
+.prog-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.15);padding:4px 12px;margin-bottom:16px;border-radius:6px;border:1px solid rgba(255,255,255,.25);}
+.prog-title{font-size:40px;font-weight:700;color:#fff;line-height:1.12;letter-spacing:-.4px;margin-bottom:8px;}
+.prog-institute{font-size:15px;color:rgba(255,255,255,.65);}
+.fact-strip{display:flex;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.15);margin-top:28px;gap:0 0;}
+.fact-item{padding:0 32px 0 0;}
+.fact-label{font-size:10px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:5px;}
+.fact-val{font-size:15px;font-weight:600;color:#fff;}
+.prog-layout{display:grid;grid-template-columns:1fr 308px;gap:44px;padding:48px 0 72px;align-items:start;}
+.prog-about-section{margin-bottom:32px;}
+.prog-about-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.prog-about-label::before{content:'';display:block;width:3px;height:13px;background:var(--navy);border-radius:2px;flex-shrink:0;}
+.prog-about-section p{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:14px;}
+.prog-about-section p:last-child{margin-bottom:0;}
+.acc-group{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.acc-item{border-bottom:1px solid var(--border);}
+.acc-item:last-child{border-bottom:none;}
+.acc-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:18px 20px 18px 16px;
+  background:#fff;border:none;
+  border-left:3px solid transparent;
+  font-family:inherit;font-size:15px;font-weight:600;color:var(--text);
+  cursor:pointer;text-align:left;gap:16px;line-height:1.3;
+  transition:color .15s,border-color .15s,background .15s;
+}
+.acc-btn:hover{color:var(--text);background:var(--gray);border-left-color:var(--border);}
+.acc-btn.open{color:var(--text);border-left-color:var(--navy);background:#fff;}
+.acc-btn-label{flex:1;}
+.acc-chev{flex-shrink:0;color:var(--muted);transition:transform .22s cubic-bezier(.4,0,.2,1),color .15s;}
+.acc-btn.open .acc-chev{transform:rotate(180deg);color:var(--text);}
+.acc-body{
+  display:none;
+  border-left:3px solid var(--navy);
+  background:var(--gray);
+  overflow:hidden;
+}
+.acc-body.open{display:block;}
+.acc-text{padding:20px 22px;background:#fff;}
+.acc-text p{font-size:15px;color:var(--text);line-height:1.78;margin-bottom:12px;}
+.acc-text p:last-child{margin-bottom:0;}
+.acc-subj-grid{display:grid;grid-template-columns:1fr 1fr;}
+.acc-subj-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 18px;
+  background:#fff;
+  border-bottom:1px solid var(--gray);
+  border-right:1px solid var(--gray);
+}
+.acc-subj-item:nth-child(2n){border-right:none;}
+.acc-subj-item:nth-last-child(-n+2){border-bottom:none;}
+.acc-subj-num{font-size:11px;font-weight:700;color:var(--text);opacity:.45;flex-shrink:0;min-width:20px;}
+.acc-subj-name{font-size:14px;font-weight:500;color:var(--text);line-height:1.4;}
+.acc-sem-list{}
+.acc-sem-item{
+  display:grid;grid-template-columns:80px 1fr;
+  border-bottom:1px solid var(--gray);
+}
+.acc-sem-item:last-child{border-bottom:none;}
+.acc-sem-num{
+  padding:16px 12px;
+  background:var(--navy);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+}
+.acc-sem-num-val{font-size:18px;font-weight:700;color:#fff;line-height:1;}
+.acc-sem-num-lbl{font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:3px;}
+.acc-sem-content{padding:14px 18px;background:#fff;}
+.acc-sem-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.acc-sem-desc{font-size:13px;color:var(--muted);line-height:1.55;}
+.acc-list{list-style:none;padding:0;}
+.acc-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 18px;
+  background:#fff;
+  border-bottom:1px solid var(--gray);
+  font-size:14px;color:var(--text);line-height:1.55;
+}
+.acc-list li:last-child{border-bottom:none;}
+.acc-list li::before{
+  content:'';display:inline-block;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--navy);flex-shrink:0;margin-top:6px;
+}
+.acc-careers{padding:16px 18px;display:flex;flex-wrap:wrap;gap:8px;background:#fff;}
+.career-chip{
+  display:inline-flex;align-items:center;
+  padding:7px 14px;
+  background:var(--gray);border:1px solid var(--border);
+  border-radius:6px;font-size:14px;color:var(--text);font-weight:500;
+  line-height:1.3;transition:background .15s,border-color .15s;
+}
+.career-chip:hover{background:#E4E7ED;border-color:#C5CADE;}
+.prog-sidebar{position:sticky;top:80px;display:flex;flex-direction:column;gap:12px;}
+.pdf-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:20px;}
+.pdf-card-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.pdf-icon{width:38px;height:38px;background:var(--navy);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pdf-info-title{font-size:14px;font-weight:700;color:var(--text);}
+.pdf-info-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.pdf-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:38px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;border-radius:6px;border:none;cursor:pointer;text-decoration:none;transition:background .15s;}
+.pdf-btn:hover{background:#111e33;}
+.apply-box{background:var(--navy);border-radius:6px;padding:24px;}
+.apply-box-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;}
+.apply-box-sub{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:18px;line-height:1.55;}
+.apply-box-btn{display:flex;align-items:center;justify-content:center;width:100%;height:40px;background:#fff;color:var(--text);font-size:14px;font-weight:700;border-radius:6px;border:none;cursor:pointer;margin-bottom:8px;text-decoration:none;transition:background .15s;}
+.apply-box-btn:hover{background:rgba(255,255,255,.88);}
+.apply-box-link{display:flex;align-items:center;justify-content:center;width:100%;height:34px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-size:13px;border-radius:6px;text-decoration:none;transition:background .15s;}
+.apply-box-link:hover{background:rgba(255,255,255,.08);}
+.contact-box{border:1px solid var(--border);border-radius:6px;padding:18px;}
+.contact-box-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.contact-line{font-size:13px;color:var(--text);margin-bottom:5px;line-height:1.55;}
+.contact-line a{color:var(--text);}
+.contact-line a:hover{text-decoration:underline;}
+@media(max-width:900px){.prog-layout{grid-template-columns:1fr;}
+.prog-sidebar{position:static;}
+.prog-title{font-size:28px;}}
+@media(max-width:768px){.container{padding:0 16px;}
+.prog-title{font-size:24px;}
+.prog-hero{padding:28px 0 24px;}
+.prog-layout{padding:28px 0 48px;}
+.acc-subj-grid{grid-template-columns:1fr;}
+.acc-subj-item{border-right:none;}
+.acc-subj-item:nth-last-child(-n+2){border-bottom:1px solid var(--gray);}
+.acc-subj-item:last-child{border-bottom:none;}
+.acc-sem-item{grid-template-columns:56px 1fr;}
+.acc-sem-num-val{font-size:15px;}}
+@media(min-width:1440px){.container{max-width:1360px;}}
+</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="accent.css">
+</head>
+<body>
+
+<!--TOP-->
+<div class="utility"><div class="container"><div class="utility-inner"><span class="utility-name">Таврійський національний університет імені В. І. Вернадського</span>
+<div class="utility-right"><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a><a class="u-long" href="crimea-center.html">Центр реінтеграції та розвитку Криму</a><a href="study.html#rozklady-zaniat">Розклад</a><div class="utility-sep"></div><div class="utility-lang"><b>UA</b> <span>|</span> <a href="#" style="color:rgba(255,255,255,.5)">EN</a></div></div></div></div></div>
+<nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="logo"><div class="logo-box">ТНУ</div></a>
+<ul class="nav-links"><li class="nav-item has-mega" data-menu="univ"><button type="button" aria-expanded="false" aria-controls="menu-univ">Університет</button></li><li class="nav-item has-mega" data-menu="vstup"><button type="button" aria-expanded="false" aria-controls="menu-vstup">Вступникам</button></li><li class="nav-item has-mega" data-menu="stud"><button type="button" aria-expanded="false" aria-controls="menu-stud">Студентам</button></li><li class="nav-item has-mega active" data-menu="osv"><button type="button" aria-expanded="false" aria-controls="menu-osv">Освітній процес</button></li><li class="nav-item has-mega" data-menu="nauka"><button type="button" aria-expanded="false" aria-controls="menu-nauka">Наука</button></li><li class="nav-item"><a href="international.html">Міжнародне співробітництво</a></li><li class="nav-item"><a href="news.html">Новини</a></li></ul>
+<div class="nav-right"><button class="btn-search" id="searchBtn" aria-label="Пошук"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button><a class="btn-apply" href="admission.html">Подати документи</a><button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button></div></div>
+<div class="mega-wrap" id="menu-univ"><div class="container"><div class="mega-inner cols-5"><div class="mega-col"><div class="mega-lbl">Про університет</div><div class="mega-links"><a href="about.html#istoriia">Історія</a><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a><a href="about.html#halereia">Галерея</a></div></div><div class="mega-col"><div class="mega-lbl">Керівництво</div><div class="mega-links"><a href="leadership.html#vybory-rektora">Вибори ректора</a><a href="leadership.html#vchena-rada">Вчена рада</a><a href="leadership.html#nahliadova-rada">Наглядова рада</a></div></div><div class="mega-col"><div class="mega-lbl">Документи Університету</div><div class="mega-links"><a href="documents.html#normatyvno-pravovi-dokumenty">Нормативно-правові документи</a><a href="documents.html#finansy">Фінанси</a><a href="documents.html#publichni-zakupivli">Публічні закупівлі</a><a href="documents.html#platni-posluhy">Платні послуги</a><a href="documents.html#okhorona-pratsi">Охорона праці</a><a href="documents.html#zvity-rektora">Звіти ректора</a><a href="documents.html#antykoruptsiia">Антикорупція</a></div></div><div class="mega-col"><div class="mega-lbl">Працівникам</div><div class="mega-links"><a href="staff.html#vakansii">Вакансії</a><a href="staff.html#kadrove-zabezpechennia">Кадрове забезпечення</a><a href="staff.html#atestatsiia">Атестація</a><a href="staff.html#profesiinyi-rozvytok">Професійний розвиток</a></div></div><div class="mega-col"><div class="mega-lbl">Контакти</div><div class="mega-links"><a href="contacts.html#telefonnyi-dovidnyk">Телефонний довідник</a><a href="contacts.html#hrafik-pryiomu">Графік прийому</a><a href="contacts.html#7-qr-kodiv-dii">7 QR-кодів Дії</a><a href="contacts.html#skrynka-doviry">Скринька довіри</a></div><div class="mega-address">вул. Джона Маккейна, 33<br>Київ, 01042<br>+38 (044) 529-05-16<br>gendep@tnu.edu.ua</div></div></div></div></div>
+<div class="mega-wrap" id="menu-vstup"><div class="container"><div class="mega-inner cols-6"><div class="mega-col"><div class="mega-lbl">Вступна кампанія</div><div class="mega-links"><a href="admission-rules.html#pravyla-pryiomu">Правила прийому</a><a href="admission-rules.html#perelik-spetsialnostei">Перелік спеціальностей</a></div></div><div class="mega-col"><div class="mega-lbl">Оплата навчання</div><div class="mega-links"><a href="tuition.html#vartist-navchannia">Вартість навчання</a><a href="tuition.html#derzhavnyi-hrant">Державний грант</a><a href="tuition.html#vstup-za-vaucherom">Вступ за ваучером</a></div></div><div class="mega-col"><div class="mega-lbl">Умови вступу</div><div class="mega-links"><a href="admission.html#1-kurs-pzso">1 курс (ПЗСО)</a><a href="admission.html#2-kurs-nrk5">2 курс (НРК5)</a><a href="admission.html#2-kurs-nrk6-nrk7">2 курс (НРК6, НРК7)</a><a href="admission.html#mahistratura">Магістратура</a><a href="admission.html#aspirantura-doktorantura">Аспірантура/Докторантура</a></div></div><div class="mega-col"><div class="mega-lbl">Особливі категорії вступників</div><div class="mega-links"><a href="admission-categories.html#zymovyi-vstup">Зимовий вступ</a><a href="admission-categories.html#z-tymchasovo-okupovanykh-terytorii">З тимчасово окупованих територій</a><a href="admission-categories.html#inozemtsiam">Іноземцям</a><a href="admission-categories.html#perevedennia-ponovlennia">Переведення/Поновлення</a></div></div><div class="mega-col"><div class="mega-lbl">Етапи вступу</div><div class="mega-links"><a href="admission-stages.html#prohramy-vstupnykh-vyprobuvan">Програми вступних випробувань</a><a href="admission-stages.html#hrafiky">Графіки</a><a href="admission-stages.html#rezultaty">Результати</a><a href="admission-stages.html#derzhavne-zamovlennia">Державне замовлення</a><a href="admission-stages.html#reitynhovi-spysky">Рейтингові списки</a><a href="admission-stages.html#nakazy-pro-zarakhuvannia">Накази про зарахування</a></div></div><div class="mega-col"><div class="mega-lbl">Приймальна комісія</div><div class="mega-links"><a href="admissions-office.html#kontakty">Контакти</a><a href="admissions-office.html#hrafik-roboty">Графік роботи</a><a href="admissions-office.html#sklad-komisii">Склад комісій</a><a href="admissions-office.html#polozhennia">Положення</a><a href="admissions-office.html#plan-roboty">План роботи</a><a href="admissions-office.html#rishennia">Рішення</a><a href="admissions-office.html#plan-proforiientatsiinoi-roboty">План профорієнтаційної роботи</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-stud"><div class="container"><div class="mega-inner cols-4"><div class="mega-col"><div class="mega-lbl">Навчання</div><div class="mega-links"><a href="study.html#rozklady-zaniat">Розклади занять</a><a href="study.html#hrafiky-osvitnoho-protsesu">Графіки освітнього процесу</a><a href="study.html#vybirkovi-dystsypliny">Вибіркові дисципліни</a><a href="study.html#praktyka">Практика</a><a href="study.html#pidsumkova-atestatsiia">Підсумкова атестація</a><a href="study.html#poriadok-apeliatsii">Порядок апеляції</a><a href="study.html#neformalna-informalna-osvita">Неформальна/інформальна освіта</a></div></div><div class="mega-col"><div class="mega-lbl">Студентське життя</div><div class="mega-links"><a href="student-governance.html#zakhody">Заходи</a><a href="student-governance.html#studentske-samovriaduvannia">Студентське самоврядування</a><a href="student-governance.html#hurtozhytky">Гуртожитки</a></div></div><div class="mega-col"><div class="mega-lbl">Фінанси</div><div class="mega-links"><a href="payment.html#rekvizyty-dlia-oplaty">Реквізити для оплати</a><a href="payment.html#stypendii">Стипендії</a></div></div><div class="mega-col"><div class="mega-lbl">Кар’єра</div><div class="mega-links"><a href="career.html#pratsevlashtuvannia">Працевлаштування</a><a href="career.html#pidhotovka-ofitseriv-zapasu">Підготовка офіцерів запасу</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-osv"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Освітні програми</div><div class="mega-links"><a href="education.html#kataloh-prohram">Каталог програм</a><a href="education.html#akredytatsiia">Акредитація</a><a href="education.html#haranty-osvitnikh-prohram">Гаранти освітніх програм</a></div></div><div class="mega-col"><div class="mega-lbl">Якість освіти</div><div class="mega-links"><a href="quality.html#rada-iakosti-osvity">Рада якості освіти</a><a href="quality.html#monitorynh-iakosti-osvity">Моніторинг якості освіти</a><a href="quality.html#akademichna-dobrochesnist">Академічна доброчесність</a></div></div><div class="mega-col"><div class="mega-lbl">Нормативні документи</div><div class="mega-links"><a href="regulations.html#zakonodavstvo">Законодавство</a><a href="regulations.html#polozhennia">Положення</a><a href="regulations.html#nakazy">Накази</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-nauka"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Наукова діяльність</div><div class="mega-links"><a href="science.html#naukova-tema">Наукова тема</a><a href="science.html#periodychni-vydannia">Періодичні видання</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові ради</div><div class="mega-links"><a href="science-councils.html#spetsializovani-vcheni-rady">Спеціалізовані вчені ради</a><a href="science-councils.html#rada-molodykh-vchenykh">Рада молодих вчених</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові заходи</div><div class="mega-links"><a href="science-events.html#anons-konferentsii">Анонс конференцій</a><a href="science-events.html#materialy-konferentsii">Матеріали конференцій</a><a href="science-events.html#hrafik-zakhodiv">Графік заходів</a></div></div></div></div></div>
+</nav>
+<div class="search-panel" id="searchPanel"><div class="container"><form class="search-panel-inner" action="search.html" method="get"><input class="search-panel-input" id="searchPanelInput" name="q" type="text" placeholder="Пошук по сайту..." autocomplete="off"><button class="search-panel-close" id="searchPanelClose" type="button" aria-label="Закрити">×</button></form></div></div>
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-menu" id="mobMenu"><div class="mob-head"><div class="mob-logo"><div class="mob-logo-box">ТНУ</div><div class="mob-logo-label">Таврійський<br>національний</div></div><button class="mob-close" id="mobClose" aria-label="Закрити">×</button></div>
+<div class="mob-nav"><div class="mob-item"><div class="mob-item-head" data-mob="univ">Університет<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-univ"><div class="mob-sub-group"><a href="about.html">Про університет</a><a href="leadership.html">Керівництво</a><a href="documents.html">Документи Університету</a><a href="staff.html">Працівникам</a><a href="contacts.html">Контакти</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="vstup">Вступникам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-vstup"><div class="mob-sub-group"><a href="admission-rules.html">Вступна кампанія</a><a href="tuition.html">Оплата навчання</a><a href="admission.html">Умови вступу</a><a href="admission-categories.html">Особливі категорії вступників</a><a href="admission-stages.html">Етапи вступу</a><a href="admissions-office.html">Приймальна комісія</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="stud">Студентам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-stud"><div class="mob-sub-group"><a href="study.html">Навчання</a><a href="student-governance.html">Студентське життя</a><a href="payment.html">Фінанси</a><a href="career.html">Кар’єра</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="osv">Освітній процес<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-osv"><div class="mob-sub-group"><a href="education.html">Освітні програми</a><a href="quality.html">Якість освіти</a><a href="regulations.html">Нормативні документи</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="nauka">Наука<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-nauka"><div class="mob-sub-group"><a href="science.html">Наукова діяльність</a><a href="science-councils.html">Наукові ради</a><a href="science-events.html">Наукові заходи</a></div></div></div><div class="mob-item"><div class="mob-item-head"><a href="international.html">Міжнародне співробітництво</a></div></div><div class="mob-item"><div class="mob-item-head"><a href="news.html">Новини</a></div></div></div>
+<div class="mob-footer-block"><a class="mob-apply-btn" href="admission.html">Подати документи</a></div></div>
+<!--/TOP-->
+
+
+
+
+
+
+
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar"><div class="container"><nav class="breadcrumb">
+  <a href="index.html">ТНУ</a><span class="bc-sep">/</span>
+  <b style="font-weight:400">Освітній процес</b><span class="bc-sep">/</span>
+  <a href="programs.html">Каталог програм</a><span class="bc-sep">/</span>
+  <span class="bc-cur" id="bc-title">Програма</span>
+</nav></div></div>
+
+<!-- HERO -->
+<div class="prog-hero"><div class="container">
+  <div class="prog-badge" id="ph-badge">Бакалавр</div>
+  <div class="prog-title" id="ph-title">…</div>
+  <div class="prog-institute" id="ph-institute"></div>
+  <div class="fact-strip" id="ph-facts"></div>
+</div></div>
+
+<!-- MAIN LAYOUT -->
+<div class="container"><div class="prog-layout">
+  <main>
+
+    <!-- About (open) -->
+    <div class="prog-about-section">
+      <div class="prog-about-label">Про програму</div>
+      <div id="pm-about"></div>
+    </div>
+
+    <!-- Accordion -->
+    <div class="acc-group">
+
+      <div class="acc-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Що вивчатимете</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="acc-subj-grid" id="pm-subjects"></div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Структура навчання</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="acc-sem-list">
+            <div class="acc-sem-item">
+              <div class="acc-sem-num"><div class="acc-sem-num-val">I</div><div class="acc-sem-num-lbl">курс</div></div>
+              <div class="acc-sem-content"><div class="acc-sem-title">Загальна підготовка</div><div class="acc-sem-desc">Вступ до спеціальності, філософія, іноземна мова, вступний модуль зі спеціальності</div></div>
+            </div>
+            <div class="acc-sem-item">
+              <div class="acc-sem-num"><div class="acc-sem-num-val">II</div><div class="acc-sem-num-lbl">курс</div></div>
+              <div class="acc-sem-content"><div class="acc-sem-title">Фахова підготовка</div><div class="acc-sem-desc">Профільні теоретичні дисципліни, перша навчальна практика в установах-партнерах</div></div>
+            </div>
+            <div class="acc-sem-item">
+              <div class="acc-sem-num"><div class="acc-sem-num-val">III</div><div class="acc-sem-num-lbl">курс</div></div>
+              <div class="acc-sem-content"><div class="acc-sem-title">Поглиблена спеціалізація</div><div class="acc-sem-desc">Вибіркові дисципліни, виробнича практика, можливість академічної мобільності</div></div>
+            </div>
+            <div class="acc-sem-item">
+              <div class="acc-sem-num"><div class="acc-sem-num-val">IV</div><div class="acc-sem-num-lbl">курс</div></div>
+              <div class="acc-sem-content"><div class="acc-sem-title">Підсумкова атестація</div><div class="acc-sem-desc">Переддипломна практика, написання та захист кваліфікаційної роботи, державний іспит</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Умови вступу</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <ul class="acc-list" id="pm-admission">
+            <li>Повна загальна середня освіта (атестат після 11 класу) або диплом молодшого бакалавра / фахового молодшого бакалавра</li>
+            <li>Результати НМТ відповідно до вимог програми</li>
+            <li>Конкурсний відбір за рейтингом балів через систему ЄДЕБО</li>
+            <li>Пільги для учасників бойових дій та осіб з особливими освітніми потребами</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Вартість навчання</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <ul class="acc-list" id="pm-cost">
+            <li>Державне замовлення — безкоштовно (за конкурсом балів)</li>
+            <li>Контракт — уточнюйте в приймальній комісії</li>
+            <li>Академічна стипендія — для студентів держзамовлення за результатами сесії</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Необхідні документи</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <ul class="acc-list">
+            <li>Оригінал або нотаріально завірена копія атестата / диплома</li>
+            <li>Результати НМТ (через ЄДЕБО — окремого подання не потрібно)</li>
+            <li>Паспорт або ID-картка (копія)</li>
+            <li>6 фотографій розміром 3×4 см</li>
+            <li>Медична довідка форми 086-у</li>
+            <li>Заява-анкета вступника (заповнюється в приймальній комісії)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Практика та стажування</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <ul class="acc-list">
+            <li>Навчальна практика після 2 курсу в установах та організаціях за профілем</li>
+            <li>Виробнича практика на 3 курсі у підприємствах-партнерах університету</li>
+            <li>Переддипломна практика на 4 курсі за місцем майбутнього працевлаштування</li>
+            <li>Міжнародне стажування в рамках програм Erasmus+ та двосторонніх угод</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Академічна мобільність</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <ul class="acc-list">
+            <li>Програми обміну студентами Erasmus+ з університетами країн ЄС</li>
+            <li>Співробітництво з університетами Литви, Польщі, Австрії, Іспанії, Угорщини, Італії</li>
+            <li>Стажування на підприємствах Німеччини в рамках партнерських програм</li>
+            <li>Підвищення рівня іноземної мови в університетах-партнерах</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item" id="pm-careers-item">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span class="acc-btn-label">Ким можна працювати</span>
+          <svg class="acc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="acc-body">
+          <div class="acc-careers" id="pm-careers"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <aside class="prog-sidebar">
+    <div class="pdf-card">
+      <div class="pdf-card-head">
+        <div class="pdf-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div><div class="pdf-info-title">Освітня програма</div><div class="pdf-info-sub">Офіційний документ (PDF)</div></div>
+      </div>
+      <a class="pdf-btn" id="pdf-link" href="#" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Відкрити PDF</a>
+    </div>
+    <div class="apply-box">
+      <div class="apply-box-title">Готові до вступу?</div>
+      <div class="apply-box-sub">Подайте заяву через ЄДЕБО. Вступна кампанія 2026 відкрита.</div>
+      <a href="https://vstup.edbo.gov.ua/" target="_blank" class="apply-box-btn">Подати заяву →</a>
+      <a href="https://tnu.edu.ua/vstup/" target="_blank" class="apply-box-link">Умови вступу</a>
+    </div>
+    <div class="contact-box">
+      <div class="contact-box-title">Приймальна комісія</div>
+      <div class="contact-line">вул. Джона Маккейна, 33, Київ</div>
+      <div class="contact-line"><a href="tel:+380445290516">+38 (044) 529-05-16</a></div>
+      <div class="contact-line"><a href="mailto:pk@tnu.edu.ua">pk@tnu.edu.ua</a></div>
+      <div class="contact-line" style="margin-top:8px;font-size:12px;color:var(--muted);">Пн–Пт: 9:00–17:00</div>
+    </div>
+  </aside>
+</div></div>
+
+<!--BOTTOM-->
+<footer class="footer"><div class="container"><div class="footer-grid">
+<div><div class="footer-logo"><div class="footer-logo-box">ТНУ</div><div><div class="footer-logo-top">Таврійський національний університет</div><div class="footer-logo-bot">імені В. І. Вернадського</div></div></div><p class="footer-desc">Кримський університет у центрі Києва.</p></div>
+<div><h4>Університет</h4><ul><li><a href="about.html">Про університет</a></li><li><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a></li><li><a href="leadership.html">Керівництво</a></li><li><a href="documents.html">Документи Університету</a></li></ul></div>
+<div><h4>Навчання</h4><ul><li><a href="programs.html">Освітні програми</a></li><li><a href="admission.html">Умови вступу</a></li><li><a href="study.html#rozklady-zaniat">Розклад</a></li><li><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a></li></ul></div>
+<div><h4>Контакти</h4><ul><li><a href="contacts.html">вул. Джона Маккейна, 33, Київ</a></li><li><a href="tel:+380445290516">+38 (044) 529-05-16</a></li><li><a href="mailto:gendep@tnu.edu.ua">gendep@tnu.edu.ua</a></li><li><a href="https://tnu.edu.ua/poryadok-suprovodu-nadannya-dopomogi/" target="_blank" rel="noopener">Супровід осіб з інвалідністю</a></li></ul></div>
+</div><div class="footer-bottom"><span>© 2026 Таврійський національний університет імені В. І. Вернадського</span><span>Усі права захищені</span></div></div></footer>
+<!--/BOTTOM-->
+
+<script>
+const programs={
+  journalism:{title:'Журналістика',spec:'C7 Журналістика',degree:'Бакалавр',institute:'Інститут філології та журналістики',duration:'3 роки 10 місяців',form:'Денна, заочна',lang:'Українська',pdf:'https://tnu.edu.ua/profili-osvitnih-program/',about:['Освітня програма «Журналістика» готує сучасних медіафахівців, здатних працювати в усіх форматах — від друкованих видань до онлайн-медіа та телебачення. Студенти опановують основи репортажу, редагування, фотожурналістики та цифрового сторителінгу.','Програма робить акцент на практичних навичках: студенти працюють у власній редакції університетського медіа, проходять практику в провідних українських ЗМІ та беруть участь у міжнародних обмінних програмах.'],subjects:['Основи журналістики','Мультимедійний репортаж','Редагування тексту','Фотожурналістика','Медіаправо та етика','Цифровий маркетинг ЗМІ'],careers:['Репортер / кореспондент у ЗМІ','Редактор онлайн-видання','SMM-менеджер медіакомпанії','PR-спеціаліст','Контент-менеджер','Ведучий радіо та телебачення']},
+  law:{title:'Право',spec:'D8 Право',degree:'Бакалавр',institute:'Інститут права',duration:'3 роки 10 місяців',form:'Денна, заочна',lang:'Українська',pdf:'https://tnu.edu.ua/profili-osvitnih-program/',about:['Освітня програма «Право» формує юристів широкого профілю з глибоким розумінням системи вітчизняного та міжнародного права. Програма охоплює публічне та приватне право, процесуальні дисципліни та актуальні питання євроінтеграції.','Студенти набувають практичних навичок у юридичній клініці університету, де надають безоплатну правову допомогу громадянам, та проходять практику в судах, прокуратурі та адвокатських об\'єднаннях.'],subjects:['Конституційне право','Цивільне право','Кримінальне право','Адміністративне право','Міжнародне публічне право','Процесуальне право'],careers:['Адвокат','Юрисконсульт підприємства','Прокурор','Нотаріус','Юридичний радник у держоргані','Суддя (після відповідних кваліфікацій)']},
+  psychology:{title:'Психологія',spec:'C4 Психологія',degree:'Бакалавр',institute:'Факультет психології та соціальної роботи',duration:'3 роки 10 місяців',form:'Денна, заочна',lang:'Українська',pdf:'https://tnu.edu.ua/profili-osvitnih-program/',about:['Освітня програма «Психологія» дає фундаментальну підготовку з усіх галузей психологічної науки — від загальної та вікової до клінічної та організаційної. Особлива увага приділяється психологічній реабілітації у контексті воєнного часу.','Практична підготовка охоплює кризове консультування, групову роботу та психодіагностику. Студенти проходять практику в психологічних службах, лікарнях, школах та реабілітаційних центрах.'],subjects:['Загальна психологія','Вікова та педагогічна психологія','Клінічна психологія','Психодіагностика','Консультативна психологія','Психологія стресу та реабілітація'],careers:['Практичний психолог','Шкільний психолог','HR-спеціаліст','Кризовий консультант','Психолог у медичних закладах','Дослідник у наукових інститутах']},
+  cs:{title:"Комп'ютерні науки",spec:"F3 Комп'ютерні науки",degree:'Бакалавр',institute:'Інститут муніципального управління та міського господарства',duration:'3 роки 10 місяців',form:'Денна, заочна',lang:'Українська',pdf:'https://tnu.edu.ua/profili-osvitnih-program/',about:["Освітня програма «Комп'ютерні науки» готує фахівців у галузі програмної інженерії, аналізу даних та штучного інтелекту. Програма поєднує академічну глибину з сучасними індустріальними стандартами.",'Студенти вивчають алгоритми та структури даних, розробку вебдодатків, бази даних та хмарні технології. Тісна співпраця з IT-компаніями забезпечує актуальні стажування та практику.'],subjects:["Алгоритми та структури даних","Об'єктно-орієнтоване програмування","Бази даних","Веброзробка","Машинне навчання","Мережеві технології"],careers:['Розробник програмного забезпечення','Data Scientist / аналітик даних','Системний адміністратор','DevOps-інженер','Фахівець з кібербезпеки','IT-консультант']},
+  business:{title:'Управління бізнесом',spec:'D3 Управління бізнесом',degree:'Бакалавр',institute:'Інститут економіки та управління',duration:'3 роки 10 місяців',form:'Денна, заочна',lang:'Українська',pdf:'https://tnu.edu.ua/profili-osvitnih-program/',about:['Освітня програма «Управління бізнесом» формує менеджерів нового покоління, здатних ефективно керувати організаціями в умовах динамічного ринку. Програма охоплює стратегічний менеджмент, фінанси, маркетинг та підприємництво.','Акцент на практичних кейсах, роботі з реальними бізнес-проблемами та розвитку лідерських навичок. Студенти беруть участь у стартап-програмах та проходять практику в компаніях-партнерах.'],subjects:['Основи менеджменту','Маркетинг','Фінансовий менеджмент','Стратегічне управління','Підприємництво та стартапи','Управління проєктами'],careers:['Менеджер проєктів','Бізнес-аналітик','Підприємець / засновник стартапу','Операційний директор','Консультант з управління','Менеджер з розвитку бізнесу']},
+  ier:{title:'Міжнародні економічні відносини',spec:'292 Міжнародні економічні відносини',degree:'Бакалавр',institute:'Навчально-науковий інститут менеджменту, економіки та природокористування',duration:'3 роки 10 місяців',form:'Денна',lang:'Українська',pdf:'https://tnu.edu.ua/profili-osvitnih-program/',about:['Освітня програма «Міжнародні економічні відносини» готує фахівців, інтегрованих у європейський простір, здатних розв\'язувати складні спеціалізовані задачі та прикладні проблеми у сфері зовнішньоекономічної діяльності, міжнародної торгівлі та валютно-фінансових відносин.','Об\'єктом вивчення є функціонування та розвиток світового господарства, форми міжнародних економічних відносин і механізми їх реалізації на мікро-, мезо-, макро- та мегарівнях. Програма передбачає поглиблене вивчення іноземних мов та практику на підприємствах із зовнішньоекономічною діяльністю.'],subjects:['Економічна теорія та теорія МЕВ','Основи міжнародної макроекономіки','Зовнішньоекономічна діяльність','Митна справа','Міжнародні економічні відносини','Основи дипломатії та переговори','Менеджмент ЗЕД','Фінанси підприємств та ТНК','Маркетинг національного ринку','Оцінка інвестиційних проектів','Міжнародна діяльність України','Глобальні проблеми та безпека','Регіональна економіка та ВЕЗ','Цифрові технології в економіці','Основи міжнародної мікроекономіки','Світовий ринок ресурсів і послуг'],admission:['Повна загальна середня освіта (атестат після 11 класу) або диплом молодшого бакалавра / фахового молодшого бакалавра','НМТ — Українська мова (мінімальний бал: 100, вага у конкурсному балі: 0.30)','НМТ — Математика (мінімальний бал: 100, вага у конкурсному балі: 0.40)','НМТ — Іноземна мова (мінімальний бал: 100, вага у конкурсному балі: 0.50)','НМТ — Історія України (мінімальний бал: 100, вага у конкурсному балі: 0.30)','Конкурсний відбір здійснюється через систему ЄДЕБО за рейтингом конкурсного балу'],cost:['Державне замовлення — безкоштовно (за результатами конкурсу балів НМТ)','Контракт (денна форма навчання) — 34 500 грн / рік','Академічна стипендія для студентів держзамовлення — за результатами сесії'],careers:['Менеджер із зовнішньоекономічної діяльності','Консультант із зовнішньоекономічних питань','Економіст з міжнародної торгівлі','Аналітик в українських та міжнародних банках','Логіст у філіях транснаціональних корпорацій','Спеціаліст міжнародних організацій в Україні','Дипломатичний агент','Провідний спеціаліст в органах держуправління']},
+  philology:{title:'Філологія. Українська мова та література',spec:'В11 Філологія',degree:'Бакалавр',institute:'Інститут філології та журналістики',duration:'3 роки 10 місяців',form:'Денна, заочна',lang:'Українська',pdf:'https://tnu.edu.ua/profili-osvitnih-program/',about:['Освітня програма «Філологія» дає глибокі знання з української мови та літератури у широкому культурно-історичному контексті. Студенти вивчають мовознавство, літературознавство та опановують методи мовного аналізу.','Програма готує фахівців для роботи в освіті, видавничій справі та медіа. Акцент робиться на документознавстві, літературній творчості та прикладній лінгвістиці.'],subjects:['Сучасна українська мова','Теорія літератури','Історія української літератури','Стилістика та редагування','Мовознавство','Фольклор та народна творчість'],careers:['Вчитель української мови та літератури','Редактор видавництва','Перекладач','Літературний критик','Журналіст / копірайтер','Науковий співробітник']}
+};
+
+(function(){
+  const p = new URLSearchParams(window.location.search).get('p') || 'journalism';
+  const d = programs[p];
+  if(!d){document.body.innerHTML='<p style="padding:48px;font-family:sans-serif">Програму не знайдено. <a href="programs.html">← Усі програми</a></p>';return;}
+
+  document.title = d.title + ' — ТНУ';
+  document.getElementById('bc-title').textContent = d.title;
+  document.getElementById('ph-badge').textContent = d.degree;
+  document.getElementById('ph-title').textContent = d.title;
+  document.getElementById('ph-institute').textContent = d.institute;
+
+  document.getElementById('ph-facts').innerHTML =
+    `<div class="fact-item"><div class="fact-label">Тривалість навчання</div><div class="fact-val">${d.duration}</div></div>` +
+    `<div class="fact-item"><div class="fact-label">Форма навчання</div><div class="fact-val">${d.form}</div></div>` +
+    `<div class="fact-item"><div class="fact-label">Мова викладання</div><div class="fact-val">${d.lang}</div></div>` +
+    `<div class="fact-item"><div class="fact-label">Спеціальність</div><div class="fact-val">${d.spec}</div></div>`;
+
+  document.getElementById('pm-about').innerHTML = d.about.map(t => `<p>${t}</p>`).join('');
+
+  document.getElementById('pm-subjects').innerHTML = d.subjects.map((s, i) =>
+    `<div class="acc-subj-item"><span class="acc-subj-num">${String(i+1).padStart(2,'0')}</span><span class="acc-subj-name">${s}</span></div>`
+  ).join('');
+
+  if(d.admission){
+    const el = document.getElementById('pm-admission');
+    if(el) el.innerHTML = d.admission.map(s => `<li>${s}</li>`).join('');
+  }
+  if(d.cost){
+    const el = document.getElementById('pm-cost');
+    if(el) el.innerHTML = d.cost.map(s => `<li>${s}</li>`).join('');
+  }
+
+  const careersEl = document.getElementById('pm-careers');
+  if(d.careers && d.careers.length){
+    careersEl.innerHTML = d.careers.map(s => `<span class="career-chip">${s}</span>`).join('');
+  } else {
+    document.getElementById('pm-careers-item').style.display = 'none';
+  }
+
+  const pl = document.getElementById('pdf-link');
+  if(d.pdf) pl.href = d.pdf;
+})();
+
+function toggleAcc(btn){
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// Mega menu
+const navItems = document.querySelectorAll('.has-mega');
+let closeTimer;
+navItems.forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimer);
+    document.querySelectorAll('.mega-wrap').forEach(m => m.classList.remove('open'));
+    const menu = document.getElementById('menu-' + item.dataset.menu);
+    if(menu) menu.classList.add('open');
+    item.classList.add('open');
+  });
+  item.addEventListener('mouseleave', () => {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      document.querySelectorAll('.mega-wrap').forEach(m => m.classList.remove('open'));
+      navItems.forEach(i => i.classList.remove('open'));
+    }, 150);
+  });
+});
+document.querySelectorAll('.mega-wrap').forEach(menu => {
+  menu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+  menu.addEventListener('mouseleave', () => {
+    closeTimer = setTimeout(() => {
+      document.querySelectorAll('.mega-wrap').forEach(m => m.classList.remove('open'));
+      navItems.forEach(i => i.classList.remove('open'));
+    }, 150);
+  });
+});
+
+// Search
+const searchBtn = document.querySelector('.btn-search'),
+      searchPanel = document.getElementById('searchPanel'),
+      searchInput = document.getElementById('searchPanelInput'),
+      searchClose = document.getElementById('searchPanelClose');
+searchBtn.addEventListener('click', () => {
+  const o = searchPanel.classList.toggle('open');
+  searchBtn.classList.toggle('active', o);
+  if(o){ searchPanel.style.top = document.getElementById('navbar').getBoundingClientRect().bottom + 'px'; setTimeout(() => searchInput.focus(), 50); }
+});
+searchClose.addEventListener('click', () => { searchPanel.classList.remove('open'); searchBtn.classList.remove('active'); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape'){ searchPanel.classList.remove('open'); searchBtn.classList.remove('active'); }});
+
+// Mobile menu
+const burger = document.getElementById('navBurger'),
+      mobMenu = document.getElementById('mobMenu'),
+      mobOverlay = document.getElementById('mobOverlay'),
+      mobClose = document.getElementById('mobClose');
+burger.addEventListener('click', () => { mobMenu.classList.add('open'); mobOverlay.classList.add('open'); burger.classList.add('open'); document.body.style.overflow='hidden'; });
+mobClose.addEventListener('click', () => { mobMenu.classList.remove('open'); mobOverlay.classList.remove('open'); burger.classList.remove('open'); document.body.style.overflow=''; });
+mobOverlay.addEventListener('click', () => { mobMenu.classList.remove('open'); mobOverlay.classList.remove('open'); burger.classList.remove('open'); document.body.style.overflow=''; });
+document.querySelectorAll('.mob-item-head[data-mob]').forEach(h => {
+  h.addEventListener('click', () => {
+    const sub = document.getElementById('mob-' + h.dataset.mob);
+    const wasOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-item-head').forEach(x => x.classList.remove('open'));
+    if(!wasOpen){ sub.classList.add('open'); h.classList.add('open'); }
+  });
+});
+</script>
+<script src="site.js"></script>
+<script src="accent.js"></script>
+</body>
+</html>

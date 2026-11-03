@@ -1,0 +1,51 @@
+:root{--gold:#D9A33A}
+/* Золотий акцент: лінії й позначки, текст лишається чорним */
+.page-hero{border-bottom:3px solid var(--gold)}
+.page-hero .hero-badge{color:var(--gold);background:transparent;border:1px solid rgba(217,163,58,.6)}
+.hero-eyebrow{color:var(--gold)!important}
+.tab.on,.tab.active{border-bottom-color:var(--gold)!important}
+.stage.on{box-shadow:inset 0 3px 0 var(--gold)}
+.fact{box-shadow:inset 3px 0 0 var(--gold)}
+.acc-btn.open{box-shadow:inset 3px 0 0 var(--gold)}
+.nav-list li.active a{box-shadow:inset 3px 0 0 var(--gold)}
+.cta{border-top:3px solid var(--gold)}
+.ev-date{border-left:2px solid var(--gold);padding-left:6px}
+.footer{border-top:3px solid var(--gold)!important;position:relative;overflow:hidden}
+.mega-links a:hover{text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:4px}
+/* Пункти меню: золота лінія виростає зліва направо */
+.nav-item>a,.nav-item>button{position:relative;border-bottom-color:transparent!important}
+.nav-item>a::after,.nav-item>button::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-item>a:hover::after,.nav-item>button:hover::after,.nav-item.open>button::after,.nav-item.active>a::after,.nav-item.active>button::after{transform:scaleX(1)}
+/* Знак із логотипа: шапка сторінки й підвал */
+.page-hero{position:relative;overflow:hidden}
+.page-hero>.container{position:relative;z-index:1}
+.page-hero::after{content:"";position:absolute;right:6vw;top:10%;bottom:10%;width:240px;background:url(img/mark.png) right center/contain no-repeat;opacity:.13;pointer-events:none}
+.footer::after{content:"";position:absolute;right:-40px;bottom:-30px;width:380px;height:320px;background:url(img/mark.png) right bottom/contain no-repeat;opacity:.06;pointer-events:none}
+/* Фото в шапці повільно наближається */
+.page-hero[style]{background:var(--navy)}
+.page-hero[style]::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(28,43,74,.74),rgba(28,43,74,.74)),var(--hero-img) var(--hero-pos,center)/cover no-repeat;animation:heroZoom 24s ease-in-out infinite alternate}
+@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+/* Випадне меню м'яко виїжджає */
+.mega-wrap.open{animation:megaIn .2s ease-out}
+@keyframes megaIn{from{opacity:0;transform:translateX(-50%) translateY(-6px)}to{opacity:1;transform:translateX(-50%)}}
+/* Картки трохи піднімаються */
+.ccard,.qa-item,.fx{transition:transform .2s ease,box-shadow .2s ease}
+.ccard:hover,.qa-item:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(28,43,74,.14)}
+/* Плавна поява блоків під час прокручування */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:none}
+/* Цифри-факти */
+.facts-band{padding:56px 0 8px;background:#fff}
+.fx-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.fx{border-top:3px solid var(--gold);padding-top:18px}
+.fx b{display:block;font-size:56px;font-weight:700;letter-spacing:-1.5px;line-height:1;color:var(--text);margin-bottom:10px}
+.fx span{display:block;color:var(--muted);font-size:15px;line-height:1.45;max-width:300px}
+.section-block .fx-grid{margin:4px 0 26px}
+.section-block .fx b{font-size:40px}
+/* Фото-плитки швидкого доступу */
+.qa-grid.qa-photo{border:0;gap:12px}
+.qa-photo .qa-item{position:relative;min-height:150px;align-items:flex-end;justify-content:flex-start;padding:20px;border:0;border-bottom:3px solid var(--gold);border-radius:6px;color:#fff;font-size:15px;font-weight:600;background:linear-gradient(rgba(28,43,74,.35),rgba(28,43,74,.86)),var(--ph) center/cover no-repeat,var(--navy)}
+.qa-photo .qa-item .qa-arr{color:var(--gold)}
+.qa-photo .qa-item:hover{background:linear-gradient(rgba(28,43,74,.25),rgba(28,43,74,.8)),var(--ph) center/cover no-repeat,var(--navy)}
+@media(max-width:900px){.facts-band{padding-top:36px}.fx-grid{gap:14px}.fx{padding-top:12px}.fx b,.section-block .fx b{font-size:30px;letter-spacing:-.8px}.fx span{font-size:12.5px}.page-hero::after{display:none}.qa-photo .qa-item{min-height:110px;font-size:13px;padding:14px}}
+@media(prefers-reduced-motion:reduce){.page-hero[style]::before,.mega-wrap.open{animation:none}.rv{opacity:1;transform:none;transition:none}.ccard:hover,.qa-item:hover{transform:none}.nav-item>a::after,.nav-item>button::after{transition:none}}

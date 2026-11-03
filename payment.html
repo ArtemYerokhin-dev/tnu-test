@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Тест · Фінанси — ТНУ</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1C2B4A;--gray:#F0F2F5;--white:#FFFFFF;--text:#1A1A1A;--muted:#6B7280;--border:#D8DCE4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.65;color:var(--text);background:#fff;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+.breadcrumb{height:40px;border-bottom:1px solid var(--border);display:flex;align-items:center;font-size:13px;color:var(--muted);}
+.breadcrumb>.container{display:flex;align-items:center;width:100%;}
+.breadcrumb a{color:var(--muted);}
+.breadcrumb a:hover{color:var(--text);text-decoration:underline;}
+.breadcrumb span{margin:0 6px;}
+.page-hero{background:var(--navy);padding:52px 0 48px;}
+.hero-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.6);background:rgba(255,255,255,.1);padding:5px 14px;border-radius:6px;margin-bottom:18px;}
+.page-hero h1{font-size:36px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.4px;max-width:680px;margin-bottom:14px;}
+.hero-slogan{font-size:14px;color:rgba(255,255,255,.55);font-weight:500;}
+.page-body{padding:56px 0 80px;}
+.page-layout{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start;}
+.page-content h2{font-size:22px;font-weight:700;color:var(--text);margin-bottom:14px;letter-spacing:-.2px;}
+.page-content p{font-size:15px;color:var(--text);line-height:1.75;margin-bottom:18px;}
+.section-block{margin-bottom:48px;}
+.section-block:last-child{margin-bottom:0;}
+.notice-block{background:#FFF8E1;border:1px solid #FFD54F;border-radius:6px;padding:16px 20px;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;}
+.notice-icon{flex-shrink:0;margin-top:2px;}
+.notice-text{font-size:14px;color:var(--text);line-height:1.6;}
+.notice-text strong{color:var(--text);}
+.payment-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px;}
+.payment-card-head{background:var(--navy);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+.payment-card-num{width:26px;height:26px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.payment-card-title{font-size:14px;font-weight:700;color:#fff;}
+.payment-card-body{padding:20px;}
+.req-row{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.req-row:last-child{border-bottom:none;padding-bottom:0;}
+.req-label{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);min-width:130px;flex-shrink:0;padding-top:2px;}
+.req-val{font-size:14px;font-weight:600;color:var(--text);line-height:1.45;word-break:break-all;}
+.req-val.mono{font-family:'Courier New',monospace;font-size:13px;letter-spacing:.5px;}
+.iban span{margin-right:.55ch;}
+.iban span:last-child{margin-right:0;}
+.purpose-note{margin-top:14px;padding:12px 16px;background:var(--gray);border-radius:6px;font-size:13px;color:var(--text);line-height:1.6;}
+.purpose-note strong{color:var(--text);}
+.accordion{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:10px;}
+.acc-btn{display:flex;justify-content:space-between;align-items:center;width:100%;padding:16px 20px;font-size:15px;font-weight:600;color:var(--text);background:#fff;border:none;text-align:left;transition:background .15s;}
+.acc-btn:hover{background:var(--gray);}
+.acc-btn.open{background:var(--gray);}
+.acc-chevron{width:18px;height:18px;flex-shrink:0;transition:transform .25s;color:var(--muted);}
+.acc-btn.open .acc-chevron{transform:rotate(180deg);}
+.acc-body{display:none;padding:0 20px 20px;}
+.acc-body.open{display:block;}
+.doc-link{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text);line-height:1.45;transition:color .15s;}
+.doc-link:last-child{border-bottom:none;padding-bottom:0;}
+.doc-link:hover{color:var(--text);}
+.doc-icon{width:28px;height:28px;background:var(--gray);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.page-sidebar{position:sticky;top:80px;}
+.sidebar-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px;background:#fff;}
+.sidebar-card-head{padding:12px 18px;border-bottom:1px solid var(--border);}
+.sidebar-card-head h4{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);}
+.sidebar-card-body{padding:14px 18px;}
+.contact-row{padding:6px 0;font-size:13px;color:var(--text);line-height:1.5;}
+.contact-row:first-child{padding-top:0;}
+.contact-row:last-child{padding-bottom:0;}
+.contact-row a{color:var(--text);}
+.contact-row a:hover{color:var(--text);text-decoration:underline;}
+.nav-list{list-style:none;display:flex;flex-direction:column;}
+.nav-list li a{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;font-size:13px;color:var(--text);border-bottom:1px solid var(--border);transition:color .15s,background .15s;}
+.nav-list li:last-child a{border-bottom:none;}
+.nav-list li a:hover{color:var(--text);background:var(--gray);}
+.nav-list li.active a{color:var(--text);font-weight:600;}
+@media(max-width:768px){.container{padding:0 16px;}
+.breadcrumb{overflow:hidden;}
+.breadcrumb .container>*:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.page-hero{padding:36px 0 32px;}
+.page-hero h1{font-size:24px;}
+.page-body{padding:32px 0 48px;}
+.page-layout{grid-template-columns:1fr;gap:32px;}
+.page-sidebar{position:static;}
+.req-row{flex-direction:column;gap:4px;}
+.req-label{min-width:unset;}}
+@media(min-width:1440px){.container{max-width:1360px;}}
+</style>
+<link rel="stylesheet" href="page.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="accent.css">
+</head>
+<body>
+
+<!--TOP-->
+<div class="utility"><div class="container"><div class="utility-inner"><span class="utility-name">Таврійський національний університет імені В. І. Вернадського</span>
+<div class="utility-right"><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a><a class="u-long" href="crimea-center.html">Центр реінтеграції та розвитку Криму</a><a href="study.html#rozklady-zaniat">Розклад</a><div class="utility-sep"></div><div class="utility-lang"><b>UA</b> <span>|</span> <a href="#" style="color:rgba(255,255,255,.5)">EN</a></div></div></div></div></div>
+<nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="logo"><div class="logo-box">ТНУ</div></a>
+<ul class="nav-links"><li class="nav-item has-mega" data-menu="univ"><button type="button" aria-expanded="false" aria-controls="menu-univ">Університет</button></li><li class="nav-item has-mega" data-menu="vstup"><button type="button" aria-expanded="false" aria-controls="menu-vstup">Вступникам</button></li><li class="nav-item has-mega active" data-menu="stud"><button type="button" aria-expanded="false" aria-controls="menu-stud">Студентам</button></li><li class="nav-item has-mega" data-menu="osv"><button type="button" aria-expanded="false" aria-controls="menu-osv">Освітній процес</button></li><li class="nav-item has-mega" data-menu="nauka"><button type="button" aria-expanded="false" aria-controls="menu-nauka">Наука</button></li><li class="nav-item"><a href="international.html">Міжнародне співробітництво</a></li><li class="nav-item"><a href="news.html">Новини</a></li></ul>
+<div class="nav-right"><button class="btn-search" id="searchBtn" aria-label="Пошук"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button><a class="btn-apply" href="admission.html">Подати документи</a><button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button></div></div>
+<div class="mega-wrap" id="menu-univ"><div class="container"><div class="mega-inner cols-5"><div class="mega-col"><div class="mega-lbl">Про університет</div><div class="mega-links"><a href="about.html#istoriia">Історія</a><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a><a href="about.html#halereia">Галерея</a></div></div><div class="mega-col"><div class="mega-lbl">Керівництво</div><div class="mega-links"><a href="leadership.html#vybory-rektora">Вибори ректора</a><a href="leadership.html#vchena-rada">Вчена рада</a><a href="leadership.html#nahliadova-rada">Наглядова рада</a></div></div><div class="mega-col"><div class="mega-lbl">Документи Університету</div><div class="mega-links"><a href="documents.html#normatyvno-pravovi-dokumenty">Нормативно-правові документи</a><a href="documents.html#finansy">Фінанси</a><a href="documents.html#publichni-zakupivli">Публічні закупівлі</a><a href="documents.html#platni-posluhy">Платні послуги</a><a href="documents.html#okhorona-pratsi">Охорона праці</a><a href="documents.html#zvity-rektora">Звіти ректора</a><a href="documents.html#antykoruptsiia">Антикорупція</a></div></div><div class="mega-col"><div class="mega-lbl">Працівникам</div><div class="mega-links"><a href="staff.html#vakansii">Вакансії</a><a href="staff.html#kadrove-zabezpechennia">Кадрове забезпечення</a><a href="staff.html#atestatsiia">Атестація</a><a href="staff.html#profesiinyi-rozvytok">Професійний розвиток</a></div></div><div class="mega-col"><div class="mega-lbl">Контакти</div><div class="mega-links"><a href="contacts.html#telefonnyi-dovidnyk">Телефонний довідник</a><a href="contacts.html#hrafik-pryiomu">Графік прийому</a><a href="contacts.html#7-qr-kodiv-dii">7 QR-кодів Дії</a><a href="contacts.html#skrynka-doviry">Скринька довіри</a></div><div class="mega-address">вул. Джона Маккейна, 33<br>Київ, 01042<br>+38 (044) 529-05-16<br>gendep@tnu.edu.ua</div></div></div></div></div>
+<div class="mega-wrap" id="menu-vstup"><div class="container"><div class="mega-inner cols-6"><div class="mega-col"><div class="mega-lbl">Вступна кампанія</div><div class="mega-links"><a href="admission-rules.html#pravyla-pryiomu">Правила прийому</a><a href="admission-rules.html#perelik-spetsialnostei">Перелік спеціальностей</a></div></div><div class="mega-col"><div class="mega-lbl">Оплата навчання</div><div class="mega-links"><a href="tuition.html#vartist-navchannia">Вартість навчання</a><a href="tuition.html#derzhavnyi-hrant">Державний грант</a><a href="tuition.html#vstup-za-vaucherom">Вступ за ваучером</a></div></div><div class="mega-col"><div class="mega-lbl">Умови вступу</div><div class="mega-links"><a href="admission.html#1-kurs-pzso">1 курс (ПЗСО)</a><a href="admission.html#2-kurs-nrk5">2 курс (НРК5)</a><a href="admission.html#2-kurs-nrk6-nrk7">2 курс (НРК6, НРК7)</a><a href="admission.html#mahistratura">Магістратура</a><a href="admission.html#aspirantura-doktorantura">Аспірантура/Докторантура</a></div></div><div class="mega-col"><div class="mega-lbl">Особливі категорії вступників</div><div class="mega-links"><a href="admission-categories.html#zymovyi-vstup">Зимовий вступ</a><a href="admission-categories.html#z-tymchasovo-okupovanykh-terytorii">З тимчасово окупованих територій</a><a href="admission-categories.html#inozemtsiam">Іноземцям</a><a href="admission-categories.html#perevedennia-ponovlennia">Переведення/Поновлення</a></div></div><div class="mega-col"><div class="mega-lbl">Етапи вступу</div><div class="mega-links"><a href="admission-stages.html#prohramy-vstupnykh-vyprobuvan">Програми вступних випробувань</a><a href="admission-stages.html#hrafiky">Графіки</a><a href="admission-stages.html#rezultaty">Результати</a><a href="admission-stages.html#derzhavne-zamovlennia">Державне замовлення</a><a href="admission-stages.html#reitynhovi-spysky">Рейтингові списки</a><a href="admission-stages.html#nakazy-pro-zarakhuvannia">Накази про зарахування</a></div></div><div class="mega-col"><div class="mega-lbl">Приймальна комісія</div><div class="mega-links"><a href="admissions-office.html#kontakty">Контакти</a><a href="admissions-office.html#hrafik-roboty">Графік роботи</a><a href="admissions-office.html#sklad-komisii">Склад комісій</a><a href="admissions-office.html#polozhennia">Положення</a><a href="admissions-office.html#plan-roboty">План роботи</a><a href="admissions-office.html#rishennia">Рішення</a><a href="admissions-office.html#plan-proforiientatsiinoi-roboty">План профорієнтаційної роботи</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-stud"><div class="container"><div class="mega-inner cols-4"><div class="mega-col"><div class="mega-lbl">Навчання</div><div class="mega-links"><a href="study.html#rozklady-zaniat">Розклади занять</a><a href="study.html#hrafiky-osvitnoho-protsesu">Графіки освітнього процесу</a><a href="study.html#vybirkovi-dystsypliny">Вибіркові дисципліни</a><a href="study.html#praktyka">Практика</a><a href="study.html#pidsumkova-atestatsiia">Підсумкова атестація</a><a href="study.html#poriadok-apeliatsii">Порядок апеляції</a><a href="study.html#neformalna-informalna-osvita">Неформальна/інформальна освіта</a></div></div><div class="mega-col"><div class="mega-lbl">Студентське життя</div><div class="mega-links"><a href="student-governance.html#zakhody">Заходи</a><a href="student-governance.html#studentske-samovriaduvannia">Студентське самоврядування</a><a href="student-governance.html#hurtozhytky">Гуртожитки</a></div></div><div class="mega-col"><div class="mega-lbl">Фінанси</div><div class="mega-links"><a href="payment.html#rekvizyty-dlia-oplaty">Реквізити для оплати</a><a href="payment.html#stypendii">Стипендії</a></div></div><div class="mega-col"><div class="mega-lbl">Кар’єра</div><div class="mega-links"><a href="career.html#pratsevlashtuvannia">Працевлаштування</a><a href="career.html#pidhotovka-ofitseriv-zapasu">Підготовка офіцерів запасу</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-osv"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Освітні програми</div><div class="mega-links"><a href="education.html#kataloh-prohram">Каталог програм</a><a href="education.html#akredytatsiia">Акредитація</a><a href="education.html#haranty-osvitnikh-prohram">Гаранти освітніх програм</a></div></div><div class="mega-col"><div class="mega-lbl">Якість освіти</div><div class="mega-links"><a href="quality.html#rada-iakosti-osvity">Рада якості освіти</a><a href="quality.html#monitorynh-iakosti-osvity">Моніторинг якості освіти</a><a href="quality.html#akademichna-dobrochesnist">Академічна доброчесність</a></div></div><div class="mega-col"><div class="mega-lbl">Нормативні документи</div><div class="mega-links"><a href="regulations.html#zakonodavstvo">Законодавство</a><a href="regulations.html#polozhennia">Положення</a><a href="regulations.html#nakazy">Накази</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-nauka"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Наукова діяльність</div><div class="mega-links"><a href="science.html#naukova-tema">Наукова тема</a><a href="science.html#periodychni-vydannia">Періодичні видання</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові ради</div><div class="mega-links"><a href="science-councils.html#spetsializovani-vcheni-rady">Спеціалізовані вчені ради</a><a href="science-councils.html#rada-molodykh-vchenykh">Рада молодих вчених</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові заходи</div><div class="mega-links"><a href="science-events.html#anons-konferentsii">Анонс конференцій</a><a href="science-events.html#materialy-konferentsii">Матеріали конференцій</a><a href="science-events.html#hrafik-zakhodiv">Графік заходів</a></div></div></div></div></div>
+</nav>
+<div class="search-panel" id="searchPanel"><div class="container"><form class="search-panel-inner" action="search.html" method="get"><input class="search-panel-input" id="searchPanelInput" name="q" type="text" placeholder="Пошук по сайту..." autocomplete="off"><button class="search-panel-close" id="searchPanelClose" type="button" aria-label="Закрити">×</button></form></div></div>
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-menu" id="mobMenu"><div class="mob-head"><div class="mob-logo"><div class="mob-logo-box">ТНУ</div><div class="mob-logo-label">Таврійський<br>національний</div></div><button class="mob-close" id="mobClose" aria-label="Закрити">×</button></div>
+<div class="mob-nav"><div class="mob-item"><div class="mob-item-head" data-mob="univ">Університет<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-univ"><div class="mob-sub-group"><a href="about.html">Про університет</a><a href="leadership.html">Керівництво</a><a href="documents.html">Документи Університету</a><a href="staff.html">Працівникам</a><a href="contacts.html">Контакти</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="vstup">Вступникам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-vstup"><div class="mob-sub-group"><a href="admission-rules.html">Вступна кампанія</a><a href="tuition.html">Оплата навчання</a><a href="admission.html">Умови вступу</a><a href="admission-categories.html">Особливі категорії вступників</a><a href="admission-stages.html">Етапи вступу</a><a href="admissions-office.html">Приймальна комісія</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="stud">Студентам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-stud"><div class="mob-sub-group"><a href="study.html">Навчання</a><a href="student-governance.html">Студентське життя</a><a href="payment.html">Фінанси</a><a href="career.html">Кар’єра</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="osv">Освітній процес<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-osv"><div class="mob-sub-group"><a href="education.html">Освітні програми</a><a href="quality.html">Якість освіти</a><a href="regulations.html">Нормативні документи</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="nauka">Наука<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-nauka"><div class="mob-sub-group"><a href="science.html">Наукова діяльність</a><a href="science-councils.html">Наукові ради</a><a href="science-events.html">Наукові заходи</a></div></div></div><div class="mob-item"><div class="mob-item-head"><a href="international.html">Міжнародне співробітництво</a></div></div><div class="mob-item"><div class="mob-item-head"><a href="news.html">Новини</a></div></div></div>
+<div class="mob-footer-block"><a class="mob-apply-btn" href="admission.html">Подати документи</a></div></div>
+<!--/TOP-->
+
+
+
+
+
+
+
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb"><div class="container">
+  <a href="index.html">ТНУ</a><span>/</span>
+  <b style="font-weight:400">Студентам</b><span>/</span>
+  <span style="color:var(--text)">Фінанси</span>
+</div></div>
+
+<!-- HERO -->
+<div class="page-hero" style="--hero-img:url('img/hero/kyiv.jpg');--hero-pos:center 18%">
+  <div class="container">
+    <div class="hero-badge">Студентам</div>
+    <h1>Фінанси</h1>
+  </div>
+</div>
+
+<!-- MAIN BODY -->
+<div class="tabs-bar"><div class="container"><div class="tabs" data-tabs role="tablist"><button class="tab on" data-t="rekvizyty-dlia-oplaty" role="tab" aria-selected="true">Реквізити для оплати</button><button class="tab" data-t="stypendii" role="tab" aria-selected="false">Стипендії</button></div></div></div>
+<div class="pane on" data-p="rekvizyty-dlia-oplaty">
+<div class="page-body">
+  <div class="container">
+    <div class="page-layout">
+
+      <!-- CONTENT -->
+      <div class="page-content">
+
+        <!-- NOTICE -->
+        <div class="section-block">
+          <div class="notice-block">
+            <div class="notice-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="notice-text"><strong>Увага!</strong> У 2026–2027 навчальному році вартість навчання за кошти фізичних або юридичних осіб на 2, 3, 4 курсі бакалаврату та 2 курсі магістратури збільшена на рівень інфляції за 2025 рік — <strong>8%</strong>. Іноземних громадян індексація не стосується.</div>
+          </div>
+        </div>
+
+        <!-- PAYMENT CARDS -->
+        <div class="section-block">
+          <h2>Банківські реквізити</h2>
+          <p style="margin-bottom:24px;">Отримувач платежу у всіх випадках: <strong>Таврійський національний університет імені В. І. Вернадського</strong>, ЄДРПОУ: <strong>02070967</strong>, Банк: <strong>Державна казначейська служба України м. Київ</strong>, МФО: <strong>820172</strong>.</p>
+
+          <!-- Навчання -->
+          <div class="payment-card">
+            <div class="payment-card-head">
+              <div class="payment-card-num">1</div>
+              <div class="payment-card-title">Оплата за навчання</div>
+            </div>
+            <div class="payment-card-body">
+              <div class="req-row">
+                <div class="req-label">Рахунок IBAN</div>
+                <div class="req-val mono iban"><span>UA70</span><span>8201</span><span>7203</span><span>1324</span><span>1001</span><span>2010</span><span>0022</span><span>4</span></div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">МФО</div>
+                <div class="req-val">820172</div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">ЄДРПОУ</div>
+                <div class="req-val">02070967</div>
+              </div>
+              <div class="purpose-note">
+                <strong>Призначення платежу:</strong> за навчання – П.І.Б студента, інститут, курс, семестр
+              </div>
+            </div>
+          </div>
+
+          <!-- Гуртожиток -->
+          <div class="payment-card">
+            <div class="payment-card-head">
+              <div class="payment-card-num">2</div>
+              <div class="payment-card-title">Оплата за проживання в гуртожитку</div>
+            </div>
+            <div class="payment-card-body">
+              <div class="req-row">
+                <div class="req-label">Рахунок IBAN</div>
+                <div class="req-val mono iban"><span>UA71</span><span>8201</span><span>7203</span><span>1321</span><span>1001</span><span>2020</span><span>0022</span><span>4</span></div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">МФО</div>
+                <div class="req-val">820172</div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">ЄДРПОУ</div>
+                <div class="req-val">02070967</div>
+              </div>
+              <div class="purpose-note">
+                <strong>Призначення платежу:</strong> за проживання в гуртожитку – П.І.Б студента, інститут, курс, період проживання
+              </div>
+            </div>
+          </div>
+
+          <!-- Дублікат студквитка -->
+          <div class="payment-card">
+            <div class="payment-card-head">
+              <div class="payment-card-num">3</div>
+              <div class="payment-card-title">Виготовлення дубліката студентського квитка</div>
+            </div>
+            <div class="payment-card-body">
+              <div class="req-row">
+                <div class="req-label">Рахунок IBAN</div>
+                <div class="req-val mono iban"><span>UA70</span><span>8201</span><span>7203</span><span>1324</span><span>1001</span><span>2010</span><span>0022</span><span>4</span></div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">МФО</div>
+                <div class="req-val">820172</div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">ЄДРПОУ</div>
+                <div class="req-val">02070967</div>
+              </div>
+              <div class="purpose-note">
+                <strong>Призначення платежу:</strong> за виготовлення студентського квитка – П.І.Б студента, інститут, спеціальність, форма навчання, курс
+              </div>
+            </div>
+          </div>
+
+          <!-- Дублікат диплому -->
+          <div class="payment-card">
+            <div class="payment-card-head">
+              <div class="payment-card-num">4</div>
+              <div class="payment-card-title">Виготовлення дубліката диплому та додатка</div>
+            </div>
+            <div class="payment-card-body">
+              <div class="req-row">
+                <div class="req-label">Рахунок IBAN</div>
+                <div class="req-val mono iban"><span>UA70</span><span>8201</span><span>7203</span><span>1324</span><span>1001</span><span>2010</span><span>0022</span><span>4</span></div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">МФО</div>
+                <div class="req-val">820172</div>
+              </div>
+              <div class="req-row">
+                <div class="req-label">ЄДРПОУ</div>
+                <div class="req-val">02070967</div>
+              </div>
+              <div class="purpose-note">
+                <strong>Призначення платежу:</strong> за виготовлення диплому бакалавра (магістра) та додатка до нього – П.І.Б студента, інститут, спеціальність, форма навчання
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INDEXATION ORDERS -->
+        <div class="section-block">
+          <h2>Накази про індексацію вартості навчання</h2>
+
+          <div class="accordion">
+            <button class="acc-btn open" onclick="toggleAcc(this)">
+              2026 рік<svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></button><div class="acc-body open"><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2026/09/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-114.pdf" target="_blank" rel="noopener"><div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><span>Наказ № 114-ОД від 27.07.2026 р. Про зміну вартості навчання в 2026 році ТНУ імені В.І. Вернадського</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2026/09/114-1-%D0%9E%D0%94-%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-%D0%B2%D0%B0%D1%80%D1%82%D1%96%D1%81%D1%82%D1%8C-%D0%BD%D0%B0%D0%B2%D1%87%D0%B0%D0%BD%D0%BD%D1%8F-2026-27-07-2026.pdf" target="_blank" rel="noopener"><div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><span>Наказ № 114/1-ОД від 27.07.2026 р. Про зміну вартості навчання в 2026 році ТНУ імені В.І. Вернадського</span></a></div></div>
+<div class="accordion">
+            <button class="acc-btn" onclick="toggleAcc(this)">
+              2025 рік
+              <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="acc-body">
+              <a class="doc-link" href="https://drive.google.com/file/d/11QqoMqmND8oPzKjV5GvJgqzy2owmVfN2/view?usp=drive_link" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ № 90-ОД від 28.07.2025 р. — індексація вартості навчання (студенти)
+              </a>
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2025/09/Наказ-№-82-ОД-від-08.07.2025-р.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ № 82-ОД від 08.07.2025 р. — індексація вартості навчання (аспіранти)
+              </a>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <button class="acc-btn" onclick="toggleAcc(this)">
+              2024 рік
+              <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="acc-body">
+              <a class="doc-link" href="https://drive.google.com/file/d/168kgwuwSchdcpFSjiWGlgl8MU2rR3b2_/view?usp=sharing" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ № 113-ОД від 23.07.2024 р. — індексація вартості навчання (студенти)
+              </a>
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2024/07/Наказ-на-індексацію-іноземних-студентів-2024-рік.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ — індексація вартості навчання (іноземні студенти, 2024)
+              </a>
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2024/07/Наказ-на-індексацію-аспірантури-2024-рік.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ — індексація вартості навчання (аспіранти, 2024)
+              </a>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <button class="acc-btn" onclick="toggleAcc(this)">
+              2023 рік
+              <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="acc-body">
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2023/08/Наказ-на-вартість-навчання-підвищення-на-інфляцію-з-01.09.2023-студенти_.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ від 01.09.2023 — підвищення вартості навчання на інфляцію (студенти)
+              </a>
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2023/08/Наказ-на-вартість-навчання-підвищення-на-інфляцію-з-01.09.2023-аспіранти_.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ від 01.09.2023 — підвищення вартості навчання на інфляцію (аспіранти)
+              </a>
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2023/08/Наказ-110-ОД_20-ЛИПНЯ-2023.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ № 110-ОД від 20 липня 2023 р.
+              </a>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <button class="acc-btn" onclick="toggleAcc(this)">
+              2022 рік
+              <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="acc-body">
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2022/08/Про-зміну-вартості-за-навчання-в-2022-році-ТНУ-імені-В.-І.-Вернадського-студенти.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Про зміну вартості за навчання в 2022 році (студенти)
+              </a>
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2022/08/Про-зміну-вартості-за-навчання-в-2022-році-ТНУ-імені-В.-І.-Вернадського-аспіранти.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Про зміну вартості за навчання в 2022 році (аспіранти)
+              </a>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <button class="acc-btn" onclick="toggleAcc(this)">
+              2021 та раніше
+              <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="acc-body">
+              <a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2021/12/Інфляція.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Індексація вартості навчання (2021)
+              </a>
+              <a class="doc-link" href="https://tnu.edu.ua/sites/default/files/normativbasa/nakaz-no146-od-vid-28082019-pro-vvedenna-v-diu-risen-vcenoi-radi-universitetu.pdf" target="_blank">
+                <div class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Наказ № 146-ОД від 28.08.2019 р. — про введення в дію рішень вченої ради університету
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /page-content -->
+
+      <!-- SIDEBAR -->
+      <aside class="page-sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-head"><h4>На цій сторінці</h4></div>
+          <ul class="nav-list">
+            <li class="active"><a href="#" onclick="return false">Реквізити для оплати</a></li>
+            <li><a href="#">Оплата навчання</a></li>
+            <li><a href="#">Оплата гуртожитку</a></li>
+            <li><a href="#">Накази про індексацію</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-head"><h4>Загальні реквізити</h4></div>
+          <div class="sidebar-card-body">
+            <div class="contact-row"><strong>Отримувач</strong></div>
+            <div class="contact-row">ТНУ ім. В. І. Вернадського</div>
+            <div class="contact-row" style="margin-top:8px;"><strong>ЄДРПОУ</strong></div>
+            <div class="contact-row">02070967</div>
+            <div class="contact-row" style="margin-top:8px;"><strong>Банк</strong></div>
+            <div class="contact-row">Державна казначейська служба України м. Київ</div>
+            <div class="contact-row" style="margin-top:8px;"><strong>МФО</strong></div>
+            <div class="contact-row">820172</div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-head"><h4>Контакти бухгалтерії</h4></div>
+          <div class="sidebar-card-body">
+            <div class="contact-row">вул. Джона Маккейна, 33, Київ</div>
+            <div class="contact-row"><a href="tel:+380445294537">+38 (044) 529-45-37</a></div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div><!-- /page-layout -->
+  </div><!-- /container -->
+</div><!-- /page-body -->
+</div>
+<div class="pane" data-p="stypendii"><div class="page-body"><div class="container"><div class="page-layout"><div class="page-content" style="min-width:0"><div class="section-block"><h2>Стипендії</h2><p>Правила призначення стипендій, склад Стипендіальної комісії та рейтинги здобувачів.</p><div class="accordion"><button class="acc-btn" onclick="toggleAcc(this)" aria-expanded="false">Правила призначення стипендій студентам, аспірантам і докторантам<span class="acc-count">3 файли</span><svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="acc-body"><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2026/09/%D0%9F%D0%A0%D0%90%D0%92%D0%98%D0%9B%D0%90%20%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%BD%D1%8F%20%D1%81%D1%82%D0%B8%D0%BF%D0%B5%D0%BD%D0%B4%D1%96%D0%B9.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 28.08.2026</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2022/09/%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F-%D0%BF%D1%80%D0%BE-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%BD%D1%8F-%D1%81%D1%82%D0%B8%D0%BF%D0%B5%D0%BD%D0%B4%D1%96%D1%97-06.05.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 06.05.2022</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2022/01/%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F-%D0%BF%D1%80%D0%BE-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%BD%D1%8F-%D1%96-%D0%B2%D0%B8%D0%BF%D0%BB%D0%B0%D1%82%D0%B8-%D1%81%D1%82%D0%B8%D0%BF%D0%B5%D0%BD%D0%B4%D1%96%D0%B9.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 28.10.2021</span></a></div></div><div class="accordion"><button class="acc-btn" onclick="toggleAcc(this)" aria-expanded="false">Склад Стипендіальної комісії<span class="acc-count">12 файлів</span><svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="acc-body"><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2026/09/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-153-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-21.09.2026-%D0%9F%D1%80%D0%BE-%D0%B7%D0%B0%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F-%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83-%D1%81%D1%82%D0%B8%D0%BF%D0%B5%D0%BD%D0%B4%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%97-%D0%BA%D0%BE%D0%BC%D1%96%D1%81%D1%96%D1%97-%D0%BD%D0%B0-2026-2027-%D0%BD%D0%B0%D0%B2%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%B9-%D1%80%D1%96%D0%BA.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 21.09.2026</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2025/10/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-110-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-19.09.2025-%D0%9F%D1%80%D0%BE-%D0%B7%D0%B0%D1%82%D0%B2%D0%B5%D1%80%D0%B4%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F-%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83-%D1%81%D1%82%D0%B8%D0%BF%D0%B5%D0%BD%D0%B4%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%97-%D0%BA%D0%BE%D0%BC%D1%96%D1%81%D1%96%D1%97.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 19.09.2025</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2025/01/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-051-%D0%9E%D0%94.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 27.01.2025</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2025/01/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-1831-%D0%9E%D0%94.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 21.11.2024</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2024/09/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-143-%D0%9E%D0%94-%D0%92%D1%96%D0%B4-20.09.2024.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 20.09.2024</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2024/01/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-11-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-18.01.2024.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 18.01.2024</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2023/10/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-143-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-21.09.2023.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 21.09.2023</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2023/10/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-133-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-06.09.2023.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 06.09.2023</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2023/04/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7-47-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-21.04.2023.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 21.04.2023</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2023/02/%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7-09-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-01.02.2023.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 01.02.2023</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2022/10/%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7-118-%D0%9E%D0%94-%D0%B2%D1%96%D0%B4-24.10.2022.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 24.10.2022</span></a><a class="doc-link" href="https://tnu.edu.ua/wp-content/uploads/2022/09/%D0%BD%D0%B0%D0%BA%D0%B0%D0%B7-97-%D0%BE%D0%B4-%D0%B2%D1%96%D0%B4-05.09.22-%D0%9F%D1%80%D0%BE-%D1%81%D0%BA%D0%BB%D0%B0%D0%B4-%D1%81%D1%82%D0%B8%D0%BF%D0%B5%D0%BD%D0%B4%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%97-%D0%BA%D0%BE%D0%BC%D1%96%D1%81%D1%96%D1%97.pdf" target="_blank" rel="noopener"><span class="doc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>Редакція від 05.09.2022</span></a></div></div><div style="margin-top:18px"><a class="btn-out" href="https://tnu.edu.ua/studentske-samovraduvanna/" target="_blank" rel="noopener">Рейтинги здобувачів на tnu.edu.ua</a></div></div></div><aside class="page-sidebar"><div class="sidebar-card"><div class="sidebar-card-head"><h4>Контакти</h4></div><div class="sidebar-card-body"><div class="contact-row"><a href="contacts.html">Контакти</a></div></div></div></aside></div></div></div></div>
+
+<!--BOTTOM-->
+<footer class="footer"><div class="container"><div class="footer-grid">
+<div><div class="footer-logo"><div class="footer-logo-box">ТНУ</div><div><div class="footer-logo-top">Таврійський національний університет</div><div class="footer-logo-bot">імені В. І. Вернадського</div></div></div><p class="footer-desc">Кримський університет у центрі Києва.</p></div>
+<div><h4>Університет</h4><ul><li><a href="about.html">Про університет</a></li><li><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a></li><li><a href="leadership.html">Керівництво</a></li><li><a href="documents.html">Документи Університету</a></li></ul></div>
+<div><h4>Навчання</h4><ul><li><a href="programs.html">Освітні програми</a></li><li><a href="admission.html">Умови вступу</a></li><li><a href="study.html#rozklady-zaniat">Розклад</a></li><li><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a></li></ul></div>
+<div><h4>Контакти</h4><ul><li><a href="contacts.html">вул. Джона Маккейна, 33, Київ</a></li><li><a href="tel:+380445290516">+38 (044) 529-05-16</a></li><li><a href="mailto:gendep@tnu.edu.ua">gendep@tnu.edu.ua</a></li><li><a href="https://tnu.edu.ua/poryadok-suprovodu-nadannya-dopomogi/" target="_blank" rel="noopener">Супровід осіб з інвалідністю</a></li></ul></div>
+</div><div class="footer-bottom"><span>© 2026 Таврійський національний університет імені В. І. Вернадського</span><span>Усі права захищені</span></div></div></footer>
+<!--/BOTTOM-->
+
+<script>
+// ACCORDION
+function toggleAcc(btn){
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// SEARCH
+const searchBtn = document.getElementById('searchBtn');
+const searchPanel = document.getElementById('searchPanel');
+const searchPanelClose = document.getElementById('searchPanelClose');
+const searchPanelInput = document.getElementById('searchPanelInput');
+searchBtn.addEventListener('click', () => {
+  searchPanel.classList.add('open');
+  setTimeout(() => searchPanelInput.focus(), 120);
+});
+searchPanelClose.addEventListener('click', () => searchPanel.classList.remove('open'));
+document.addEventListener('keydown', e => { if(e.key === 'Escape') searchPanel.classList.remove('open'); });
+
+// MOBILE MENU
+const navBurger = document.getElementById('navBurger');
+const mobMenu = document.getElementById('mobMenu');
+const mobOverlay = document.getElementById('mobOverlay');
+const mobClose = document.getElementById('mobClose');
+function openMob(){ navBurger.classList.add('open'); mobMenu.classList.add('open'); mobOverlay.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMob(){ navBurger.classList.remove('open'); mobMenu.classList.remove('open'); mobOverlay.classList.remove('open'); document.body.style.overflow=''; }
+navBurger.addEventListener('click', openMob);
+mobClose.addEventListener('click', closeMob);
+mobOverlay.addEventListener('click', closeMob);
+
+// SEARCH PANEL TOP
+function updateSearchTop(){
+  const nb = document.getElementById('navbar');
+  if(nb) searchPanel.style.top = nb.getBoundingClientRect().bottom + 'px';
+}
+window.addEventListener('scroll', updateSearchTop);
+updateSearchTop();
+</script>
+<script src="site.js"></script>
+<script src="accent.js"></script>
+</body>
+</html>

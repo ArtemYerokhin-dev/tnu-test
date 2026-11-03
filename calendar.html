@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Тест · Календар подій — ТНУ</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1C2B4A;--gray:#F0F2F5;--white:#FFFFFF;--text:#1A1A1A;--muted:#6B7280;--border:#D8DCE4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.65;color:var(--text);background:#fff;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+.breadcrumb{height:40px;border-bottom:1px solid var(--border);display:flex;align-items:center;font-size:13px;color:var(--muted);}
+.breadcrumb>.container{display:flex;align-items:center;width:100%;}
+.breadcrumb a{color:var(--muted);}
+.breadcrumb a:hover{color:var(--text);text-decoration:underline;}
+.breadcrumb span{margin:0 6px;}
+.page-header{padding:32px 0 24px;}
+.page-header h1{font-size:32px;font-weight:700;color:var(--text);letter-spacing:-.3px;}
+.cal-section{padding:0 0 72px;}
+.cal-layout{display:grid;grid-template-columns:1fr 268px;gap:40px;align-items:start;}
+.cal-main{min-width:0;}
+.cal-sidebar{position:sticky;top:80px;}
+.cal-nav{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.cal-month-title{font-size:20px;font-weight:700;color:var(--text);min-width:200px;}
+.cal-nav-btn{width:36px;height:36px;background:var(--gray);border:none;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--text);cursor:pointer;transition:background .15s;flex-shrink:0;}
+.cal-nav-btn:hover{background:var(--border);}
+.cal-grid{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.cal-dow-row{display:grid;grid-template-columns:repeat(7,1fr);background:var(--navy);}
+.cal-dow{color:rgba(255,255,255,.8);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:12px 0;text-align:center;}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:110px;}
+.cal-cell{border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 12px;overflow:hidden;position:relative;}
+.cal-cell:nth-child(7n){border-right:none;}
+.cal-cell.empty{background:var(--gray);opacity:.4;}
+.cal-cell.has-event{background:rgba(224,229,255,0.45);}
+.cal-day-num{font-size:13px;font-weight:600;color:var(--muted);display:block;margin-bottom:5px;}
+.cal-cell.has-event .cal-day-num{color:var(--text);font-weight:700;}
+.cal-event-chip{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-top:3px;background:rgba(28,43,74,0.32);color:var(--text);font-size:11px;font-weight:600;padding:4px 7px;border-radius:4px;line-height:1.3;cursor:pointer;transition:background .15s;overflow:hidden;}
+.cal-event-chip:hover{background:rgba(28,43,74,0.5);text-decoration:none;}
+.upcoming-section{margin-top:0;}
+.upcoming-head-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.upcoming-row{display:flex;flex-direction:column;gap:0;}
+.upcoming-card{border-bottom:1px solid var(--border);padding:14px 0;display:flex;gap:14px;align-items:flex-start;}
+.upcoming-card:last-child{border-bottom:none;}
+.upcoming-date{flex-shrink:0;text-align:center;background:var(--navy);border-radius:6px;padding:7px 10px;min-width:44px;}
+.upcoming-day{font-size:20px;font-weight:700;color:#fff;line-height:1;}
+.upcoming-month{font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:2px;}
+.upcoming-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;display:block;margin-bottom:4px;}
+.upcoming-title:hover{text-decoration:underline;}
+.upcoming-loc{font-size:12px;color:var(--muted);}
+@media(max-width:768px){.container{padding:0 16px;}
+.page-header h1{font-size:24px;}
+.cal-days{grid-auto-rows:72px;}
+.cal-cell{padding:6px 4px;overflow:hidden;height:72px;}
+.cal-day-num{font-size:12px;margin-bottom:3px;}
+.cal-dow{font-size:9px;padding:8px 0;}
+.cal-event-chip{font-size:10px;padding:3px 6px;}
+.cal-layout{grid-template-columns:1fr;}
+.cal-sidebar{position:static;}
+.upcoming-section{margin-top:24px;}}
+@media(min-width:1440px){.container{max-width:1360px;}}
+</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="accent.css">
+</head>
+<body>
+
+<!--TOP-->
+<div class="utility"><div class="container"><div class="utility-inner"><span class="utility-name">Таврійський національний університет імені В. І. Вернадського</span>
+<div class="utility-right"><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a><a class="u-long" href="crimea-center.html">Центр реінтеграції та розвитку Криму</a><a href="study.html#rozklady-zaniat">Розклад</a><div class="utility-sep"></div><div class="utility-lang"><b>UA</b> <span>|</span> <a href="#" style="color:rgba(255,255,255,.5)">EN</a></div></div></div></div></div>
+<nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="logo"><div class="logo-box">ТНУ</div></a>
+<ul class="nav-links"><li class="nav-item has-mega" data-menu="univ"><button type="button" aria-expanded="false" aria-controls="menu-univ">Університет</button></li><li class="nav-item has-mega" data-menu="vstup"><button type="button" aria-expanded="false" aria-controls="menu-vstup">Вступникам</button></li><li class="nav-item has-mega" data-menu="stud"><button type="button" aria-expanded="false" aria-controls="menu-stud">Студентам</button></li><li class="nav-item has-mega" data-menu="osv"><button type="button" aria-expanded="false" aria-controls="menu-osv">Освітній процес</button></li><li class="nav-item has-mega" data-menu="nauka"><button type="button" aria-expanded="false" aria-controls="menu-nauka">Наука</button></li><li class="nav-item"><a href="international.html">Міжнародне співробітництво</a></li><li class="nav-item active"><a href="news.html">Новини</a></li></ul>
+<div class="nav-right"><button class="btn-search" id="searchBtn" aria-label="Пошук"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button><a class="btn-apply" href="admission.html">Подати документи</a><button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button></div></div>
+<div class="mega-wrap" id="menu-univ"><div class="container"><div class="mega-inner cols-5"><div class="mega-col"><div class="mega-lbl">Про університет</div><div class="mega-links"><a href="about.html#istoriia">Історія</a><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a><a href="about.html#halereia">Галерея</a></div></div><div class="mega-col"><div class="mega-lbl">Керівництво</div><div class="mega-links"><a href="leadership.html#vybory-rektora">Вибори ректора</a><a href="leadership.html#vchena-rada">Вчена рада</a><a href="leadership.html#nahliadova-rada">Наглядова рада</a></div></div><div class="mega-col"><div class="mega-lbl">Документи Університету</div><div class="mega-links"><a href="documents.html#normatyvno-pravovi-dokumenty">Нормативно-правові документи</a><a href="documents.html#finansy">Фінанси</a><a href="documents.html#publichni-zakupivli">Публічні закупівлі</a><a href="documents.html#platni-posluhy">Платні послуги</a><a href="documents.html#okhorona-pratsi">Охорона праці</a><a href="documents.html#zvity-rektora">Звіти ректора</a><a href="documents.html#antykoruptsiia">Антикорупція</a></div></div><div class="mega-col"><div class="mega-lbl">Працівникам</div><div class="mega-links"><a href="staff.html#vakansii">Вакансії</a><a href="staff.html#kadrove-zabezpechennia">Кадрове забезпечення</a><a href="staff.html#atestatsiia">Атестація</a><a href="staff.html#profesiinyi-rozvytok">Професійний розвиток</a></div></div><div class="mega-col"><div class="mega-lbl">Контакти</div><div class="mega-links"><a href="contacts.html#telefonnyi-dovidnyk">Телефонний довідник</a><a href="contacts.html#hrafik-pryiomu">Графік прийому</a><a href="contacts.html#7-qr-kodiv-dii">7 QR-кодів Дії</a><a href="contacts.html#skrynka-doviry">Скринька довіри</a></div><div class="mega-address">вул. Джона Маккейна, 33<br>Київ, 01042<br>+38 (044) 529-05-16<br>gendep@tnu.edu.ua</div></div></div></div></div>
+<div class="mega-wrap" id="menu-vstup"><div class="container"><div class="mega-inner cols-6"><div class="mega-col"><div class="mega-lbl">Вступна кампанія</div><div class="mega-links"><a href="admission-rules.html#pravyla-pryiomu">Правила прийому</a><a href="admission-rules.html#perelik-spetsialnostei">Перелік спеціальностей</a></div></div><div class="mega-col"><div class="mega-lbl">Оплата навчання</div><div class="mega-links"><a href="tuition.html#vartist-navchannia">Вартість навчання</a><a href="tuition.html#derzhavnyi-hrant">Державний грант</a><a href="tuition.html#vstup-za-vaucherom">Вступ за ваучером</a></div></div><div class="mega-col"><div class="mega-lbl">Умови вступу</div><div class="mega-links"><a href="admission.html#1-kurs-pzso">1 курс (ПЗСО)</a><a href="admission.html#2-kurs-nrk5">2 курс (НРК5)</a><a href="admission.html#2-kurs-nrk6-nrk7">2 курс (НРК6, НРК7)</a><a href="admission.html#mahistratura">Магістратура</a><a href="admission.html#aspirantura-doktorantura">Аспірантура/Докторантура</a></div></div><div class="mega-col"><div class="mega-lbl">Особливі категорії вступників</div><div class="mega-links"><a href="admission-categories.html#zymovyi-vstup">Зимовий вступ</a><a href="admission-categories.html#z-tymchasovo-okupovanykh-terytorii">З тимчасово окупованих територій</a><a href="admission-categories.html#inozemtsiam">Іноземцям</a><a href="admission-categories.html#perevedennia-ponovlennia">Переведення/Поновлення</a></div></div><div class="mega-col"><div class="mega-lbl">Етапи вступу</div><div class="mega-links"><a href="admission-stages.html#prohramy-vstupnykh-vyprobuvan">Програми вступних випробувань</a><a href="admission-stages.html#hrafiky">Графіки</a><a href="admission-stages.html#rezultaty">Результати</a><a href="admission-stages.html#derzhavne-zamovlennia">Державне замовлення</a><a href="admission-stages.html#reitynhovi-spysky">Рейтингові списки</a><a href="admission-stages.html#nakazy-pro-zarakhuvannia">Накази про зарахування</a></div></div><div class="mega-col"><div class="mega-lbl">Приймальна комісія</div><div class="mega-links"><a href="admissions-office.html#kontakty">Контакти</a><a href="admissions-office.html#hrafik-roboty">Графік роботи</a><a href="admissions-office.html#sklad-komisii">Склад комісій</a><a href="admissions-office.html#polozhennia">Положення</a><a href="admissions-office.html#plan-roboty">План роботи</a><a href="admissions-office.html#rishennia">Рішення</a><a href="admissions-office.html#plan-proforiientatsiinoi-roboty">План профорієнтаційної роботи</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-stud"><div class="container"><div class="mega-inner cols-4"><div class="mega-col"><div class="mega-lbl">Навчання</div><div class="mega-links"><a href="study.html#rozklady-zaniat">Розклади занять</a><a href="study.html#hrafiky-osvitnoho-protsesu">Графіки освітнього процесу</a><a href="study.html#vybirkovi-dystsypliny">Вибіркові дисципліни</a><a href="study.html#praktyka">Практика</a><a href="study.html#pidsumkova-atestatsiia">Підсумкова атестація</a><a href="study.html#poriadok-apeliatsii">Порядок апеляції</a><a href="study.html#neformalna-informalna-osvita">Неформальна/інформальна освіта</a></div></div><div class="mega-col"><div class="mega-lbl">Студентське життя</div><div class="mega-links"><a href="student-governance.html#zakhody">Заходи</a><a href="student-governance.html#studentske-samovriaduvannia">Студентське самоврядування</a><a href="student-governance.html#hurtozhytky">Гуртожитки</a></div></div><div class="mega-col"><div class="mega-lbl">Фінанси</div><div class="mega-links"><a href="payment.html#rekvizyty-dlia-oplaty">Реквізити для оплати</a><a href="payment.html#stypendii">Стипендії</a></div></div><div class="mega-col"><div class="mega-lbl">Кар’єра</div><div class="mega-links"><a href="career.html#pratsevlashtuvannia">Працевлаштування</a><a href="career.html#pidhotovka-ofitseriv-zapasu">Підготовка офіцерів запасу</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-osv"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Освітні програми</div><div class="mega-links"><a href="education.html#kataloh-prohram">Каталог програм</a><a href="education.html#akredytatsiia">Акредитація</a><a href="education.html#haranty-osvitnikh-prohram">Гаранти освітніх програм</a></div></div><div class="mega-col"><div class="mega-lbl">Якість освіти</div><div class="mega-links"><a href="quality.html#rada-iakosti-osvity">Рада якості освіти</a><a href="quality.html#monitorynh-iakosti-osvity">Моніторинг якості освіти</a><a href="quality.html#akademichna-dobrochesnist">Академічна доброчесність</a></div></div><div class="mega-col"><div class="mega-lbl">Нормативні документи</div><div class="mega-links"><a href="regulations.html#zakonodavstvo">Законодавство</a><a href="regulations.html#polozhennia">Положення</a><a href="regulations.html#nakazy">Накази</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-nauka"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Наукова діяльність</div><div class="mega-links"><a href="science.html#naukova-tema">Наукова тема</a><a href="science.html#periodychni-vydannia">Періодичні видання</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові ради</div><div class="mega-links"><a href="science-councils.html#spetsializovani-vcheni-rady">Спеціалізовані вчені ради</a><a href="science-councils.html#rada-molodykh-vchenykh">Рада молодих вчених</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові заходи</div><div class="mega-links"><a href="science-events.html#anons-konferentsii">Анонс конференцій</a><a href="science-events.html#materialy-konferentsii">Матеріали конференцій</a><a href="science-events.html#hrafik-zakhodiv">Графік заходів</a></div></div></div></div></div>
+</nav>
+<div class="search-panel" id="searchPanel"><div class="container"><form class="search-panel-inner" action="search.html" method="get"><input class="search-panel-input" id="searchPanelInput" name="q" type="text" placeholder="Пошук по сайту..." autocomplete="off"><button class="search-panel-close" id="searchPanelClose" type="button" aria-label="Закрити">×</button></form></div></div>
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-menu" id="mobMenu"><div class="mob-head"><div class="mob-logo"><div class="mob-logo-box">ТНУ</div><div class="mob-logo-label">Таврійський<br>національний</div></div><button class="mob-close" id="mobClose" aria-label="Закрити">×</button></div>
+<div class="mob-nav"><div class="mob-item"><div class="mob-item-head" data-mob="univ">Університет<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-univ"><div class="mob-sub-group"><a href="about.html">Про університет</a><a href="leadership.html">Керівництво</a><a href="documents.html">Документи Університету</a><a href="staff.html">Працівникам</a><a href="contacts.html">Контакти</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="vstup">Вступникам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-vstup"><div class="mob-sub-group"><a href="admission-rules.html">Вступна кампанія</a><a href="tuition.html">Оплата навчання</a><a href="admission.html">Умови вступу</a><a href="admission-categories.html">Особливі категорії вступників</a><a href="admission-stages.html">Етапи вступу</a><a href="admissions-office.html">Приймальна комісія</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="stud">Студентам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-stud"><div class="mob-sub-group"><a href="study.html">Навчання</a><a href="student-governance.html">Студентське життя</a><a href="payment.html">Фінанси</a><a href="career.html">Кар’єра</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="osv">Освітній процес<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-osv"><div class="mob-sub-group"><a href="education.html">Освітні програми</a><a href="quality.html">Якість освіти</a><a href="regulations.html">Нормативні документи</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="nauka">Наука<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-nauka"><div class="mob-sub-group"><a href="science.html">Наукова діяльність</a><a href="science-councils.html">Наукові ради</a><a href="science-events.html">Наукові заходи</a></div></div></div><div class="mob-item"><div class="mob-item-head"><a href="international.html">Міжнародне співробітництво</a></div></div><div class="mob-item"><div class="mob-item-head"><a href="news.html">Новини</a></div></div></div>
+<div class="mob-footer-block"><a class="mob-apply-btn" href="admission.html">Подати документи</a></div></div>
+<!--/TOP-->
+
+
+
+
+
+
+
+
+<div class="breadcrumb"><div class="container">
+  <a href="index.html">ТНУ</a><span>/</span>
+  <span style="color:var(--text)">Календар подій</span>
+</div></div>
+
+<div class="page-header"><div class="container">
+  <h1>Календар подій</h1>
+</div></div>
+
+<div class="cal-section"><div class="container">
+  <div class="cal-layout">
+    <div class="cal-main">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="calPrev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg></button>
+        <div class="cal-month-title" id="calMonthTitle"></div>
+        <button class="cal-nav-btn" id="calNext"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-dow-row">
+          <div class="cal-dow">Пн</div>
+          <div class="cal-dow">Вт</div>
+          <div class="cal-dow">Ср</div>
+          <div class="cal-dow">Чт</div>
+          <div class="cal-dow">Пт</div>
+          <div class="cal-dow">Сб</div>
+          <div class="cal-dow">Нд</div>
+        </div>
+        <div class="cal-days" id="calDays"></div>
+      </div>
+    </div>
+    <div class="cal-sidebar">
+      <div class="upcoming-section">
+        <div class="upcoming-head-label">Найближчі події</div>
+        <div class="upcoming-row" id="upcoming-list"></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!--BOTTOM-->
+<footer class="footer"><div class="container"><div class="footer-grid">
+<div><div class="footer-logo"><div class="footer-logo-box">ТНУ</div><div><div class="footer-logo-top">Таврійський національний університет</div><div class="footer-logo-bot">імені В. І. Вернадського</div></div></div><p class="footer-desc">Кримський університет у центрі Києва.</p></div>
+<div><h4>Університет</h4><ul><li><a href="about.html">Про університет</a></li><li><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a></li><li><a href="leadership.html">Керівництво</a></li><li><a href="documents.html">Документи Університету</a></li></ul></div>
+<div><h4>Навчання</h4><ul><li><a href="programs.html">Освітні програми</a></li><li><a href="admission.html">Умови вступу</a></li><li><a href="study.html#rozklady-zaniat">Розклад</a></li><li><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a></li></ul></div>
+<div><h4>Контакти</h4><ul><li><a href="contacts.html">вул. Джона Маккейна, 33, Київ</a></li><li><a href="tel:+380445290516">+38 (044) 529-05-16</a></li><li><a href="mailto:gendep@tnu.edu.ua">gendep@tnu.edu.ua</a></li><li><a href="https://tnu.edu.ua/poryadok-suprovodu-nadannya-dopomogi/" target="_blank" rel="noopener">Супровід осіб з інвалідністю</a></li></ul></div>
+</div><div class="footer-bottom"><span>© 2026 Таврійський національний університет імені В. І. Вернадського</span><span>Усі права захищені</span></div></div></footer>
+<!--/BOTTOM-->
+
+<script src="events-data.js"></script>
+<script>
+(function(){
+  const MONTHS_UA = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
+  const MONTHS_GEN = ['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
+
+  let curYear = 2026, curMonth = 5; // 0-indexed: 5 = June
+
+  function render(){
+    // Month title
+    document.getElementById('calMonthTitle').textContent = MONTHS_UA[curMonth] + ' ' + curYear;
+
+    // Build calendar
+    const daysEl = document.getElementById('calDays');
+    daysEl.innerHTML = '';
+
+    // First day of month (0=Sun, 1=Mon...) → convert to Mon-based (0=Mon)
+    const firstDay = new Date(curYear, curMonth, 1).getDay();
+    const startOffset = (firstDay === 0 ? 6 : firstDay - 1); // Mon=0
+    const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+
+    // Event map: day → event
+    const evMap = {};
+    eventsData.forEach(ev => {
+      if(ev.year === curYear && ev.month === curMonth + 1) evMap[ev.day] = ev;
+    });
+
+    // Empty cells before month start
+    for(let i = 0; i < startOffset; i++){
+      daysEl.innerHTML += '<div class="cal-cell empty"></div>';
+    }
+    // Day cells
+    for(let d = 1; d <= daysInMonth; d++){
+      const ev = evMap[d];
+      const hasEvent = !!ev;
+      daysEl.innerHTML += `<div class="cal-cell${hasEvent ? ' has-event' : ''}">
+        <span class="cal-day-num">${d}</span>
+        ${hasEvent ? `<a href="event.html?id=${ev.id}" class="cal-event-chip" title="${ev.title}">${ev.title.split(' ').slice(0,2).join(' ')}…</a>` : ''}
+      </div>`;
+    }
+
+    // Upcoming list
+    const monthEvents = eventsData.filter(ev => ev.year === curYear && ev.month === curMonth + 1);
+    const upcomingEl = document.getElementById('upcoming-list');
+    if(monthEvents.length === 0){
+      upcomingEl.innerHTML = '<div style="grid-column:1/-1;padding:16px;font-size:13px;color:var(--muted)">Подій у цьому місяці немає</div>';
+    } else {
+      upcomingEl.innerHTML = monthEvents.map(ev => `
+        <div class="upcoming-card">
+          <div class="upcoming-date">
+            <div class="upcoming-day">${ev.day}</div>
+            <div class="upcoming-month">${MONTHS_GEN[ev.month-1].slice(0,3)}</div>
+          </div>
+          <div>
+            <a href="event.html?id=${ev.id}" class="upcoming-title">${ev.title}</a>
+            <div class="upcoming-loc">${ev.location} · ${ev.time}</div>
+          </div>
+        </div>`).join('');
+    }
+  }
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    curMonth--; if(curMonth < 0){ curMonth = 11; curYear--; } render();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    curMonth++; if(curMonth > 11){ curMonth = 0; curYear++; } render();
+  });
+
+  render();
+})();
+
+const searchBtn = document.getElementById('searchBtn');
+const searchPanel = document.getElementById('searchPanel');
+const searchInput = document.getElementById('searchPanelInput');
+document.getElementById('searchPanelClose').addEventListener('click', () => searchPanel.classList.remove('open'));
+searchBtn.addEventListener('click', () => {
+  const o = searchPanel.classList.toggle('open');
+  if(o){ searchPanel.style.top = document.getElementById('navbar').getBoundingClientRect().bottom + 'px'; setTimeout(() => searchInput.focus(), 50); }
+});
+const burger = document.getElementById('navBurger');
+const mobMenu = document.getElementById('mobMenu');
+const mobOverlay = document.getElementById('mobOverlay');
+burger.addEventListener('click', () => { mobMenu.classList.add('open'); mobOverlay.classList.add('open'); burger.classList.add('open'); document.body.style.overflow='hidden'; });
+[document.getElementById('mobClose'), mobOverlay].forEach(el => el.addEventListener('click', () => { mobMenu.classList.remove('open'); mobOverlay.classList.remove('open'); burger.classList.remove('open'); document.body.style.overflow=''; }));
+</script>
+<script src="site.js"></script>
+<script src="accent.js"></script>
+</body>
+</html>

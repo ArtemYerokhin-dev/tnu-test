@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Тест · Центр реінтеграції та розвитку Криму — ТНУ</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1C2B4A;--gray:#F0F2F5;--white:#FFFFFF;--text:#1A1A1A;--muted:#6B7280;--border:#D8DCE4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.65;color:var(--text);background:#fff;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+.breadcrumb{height:40px;border-bottom:1px solid var(--border);display:flex;align-items:center;font-size:13px;color:var(--muted);}
+.breadcrumb>.container{display:flex;align-items:center;width:100%;}
+.breadcrumb a{color:var(--muted);}
+.breadcrumb a:hover{color:var(--text);text-decoration:underline;}
+.breadcrumb span{margin:0 6px;}
+.center-hero{background:var(--navy);padding:52px 0 48px;}
+.center-hero .container{position:relative;z-index:1;}
+.hero-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.6);background:rgba(255,255,255,.1);padding:5px 14px;border-radius:6px;margin-bottom:18px;}
+.center-hero h1{font-size:36px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.4px;max-width:680px;margin-bottom:16px;}
+.hero-slogan{font-size:14px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.5px;}
+.hero-flag{display:inline-flex;gap:0;margin-left:10px;vertical-align:middle;}
+.hero-flag span{display:inline-block;width:18px;height:10px;}
+.hero-flag .f-blue{background:#005BBB;}
+.hero-flag .f-yellow{background:#FFD500;}
+.hero-meta{display:flex;gap:24px;margin-top:28px;flex-wrap:wrap;}
+.hero-meta-item{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:13px;}
+.hero-meta-item svg{flex-shrink:0;opacity:.7;}
+.center-body{padding:56px 0 80px;}
+.center-layout{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start;}
+.center-content h2{font-size:22px;font-weight:700;color:var(--text);margin-bottom:14px;letter-spacing:-.2px;}
+.center-content h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:10px;}
+.center-content p{font-size:15px;color:var(--text);line-height:1.75;margin-bottom:18px;}
+.section-block{margin-bottom:44px;}
+.section-block:last-child{margin-bottom:0;}
+.quote-block{border-left:3px solid var(--navy);background:var(--gray);padding:18px 22px;border-radius:0 6px 6px 0;margin:22px 0;}
+.quote-block p{font-size:15px;font-style:italic;color:var(--text);line-height:1.7;margin:0;}
+.quote-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.info-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+.info-chip{display:flex;flex-direction:column;background:var(--gray);border-radius:6px;padding:12px 16px;min-width:160px;}
+.info-chip-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.info-chip-val{font-size:13px;font-weight:600;color:var(--text);}
+.activities-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+.activities-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--text);line-height:1.55;}
+.activities-list li::before{content:'';display:block;width:8px;height:8px;background:var(--navy);border-radius:50%;flex-shrink:0;margin-top:6px;}
+.gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0;}
+.gallery-strip img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 20%;border-radius:6px;display:block;cursor:pointer;transition:transform .25s;}
+.gallery-strip img:hover{transform:scale(1.02);}
+.center-sidebar{position:sticky;top:80px;}
+.sidebar-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px;background:#fff;}
+.sidebar-card-head{padding:12px 18px;border-bottom:1px solid var(--border);}
+.sidebar-card-head h4{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);}
+.sidebar-card-body{padding:14px 18px;}
+.contact-row{padding:6px 0;font-size:13px;color:var(--text);line-height:1.5;}
+.contact-row:first-child{padding-top:0;}
+.contact-row:last-child{padding-bottom:0;}
+.contact-row a{color:var(--text);}
+.contact-row a:hover{color:var(--text);text-decoration:underline;}
+.doc-link{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text);line-height:1.45;transition:color .15s;}
+.doc-link:last-child{border-bottom:none;padding-bottom:0;}
+.doc-link:hover{color:var(--text);}
+.doc-icon{width:28px;height:28px;background:var(--gray);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.staff-section{padding:0 0 80px;}
+.staff-section-title{font-size:24px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.2px;}
+.staff-section-sub{font-size:14px;color:var(--muted);margin-bottom:36px;}
+.staff-leads{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:40px;}
+.staff-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .2s;}
+.staff-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.staff-card-img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 20%;display:block;background:var(--gray);}
+.staff-card-body{padding:16px 18px 20px;}
+.staff-role{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.staff-name{font-size:15px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:6px;}
+.staff-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.council-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.council-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.council-card{display:flex;gap:14px;align-items:flex-start;padding:14px;border:1px solid var(--border);border-radius:6px;}
+.council-photo{width:80px;height:80px;border-radius:6px;object-fit:cover;object-position:50% 20%;flex-shrink:0;background:var(--gray);}
+.council-info{}
+.council-name{font-size:13px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:3px;}
+.council-pos{font-size:12px;color:var(--muted);line-height:1.4;}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9000;align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lb-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:6px;display:block;}
+.lb-close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;opacity:.8;}
+.lb-close:hover{opacity:1;}
+@media(max-width:768px){.container{padding:0 16px;}
+.breadcrumb{overflow:hidden;}
+.breadcrumb .container>*:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.center-hero{padding:36px 0 32px;}
+.center-hero h1{font-size:24px;}
+.hero-meta{gap:14px;}
+.center-body{padding:32px 0 48px;}
+.center-layout{grid-template-columns:1fr;gap:32px;}
+.center-sidebar{position:static;}
+.gallery-strip{grid-template-columns:repeat(3,1fr);}
+.staff-leads{grid-template-columns:1fr;}
+.council-grid{grid-template-columns:1fr;}}
+@media(min-width:1440px){.container{max-width:1360px;}}
+</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="accent.css">
+</head>
+<body>
+
+<!--TOP-->
+<div class="utility"><div class="container"><div class="utility-inner"><span class="utility-name">Таврійський національний університет імені В. І. Вернадського</span>
+<div class="utility-right"><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a><a class="u-long" href="crimea-center.html">Центр реінтеграції та розвитку Криму</a><a href="study.html#rozklady-zaniat">Розклад</a><div class="utility-sep"></div><div class="utility-lang"><b>UA</b> <span>|</span> <a href="#" style="color:rgba(255,255,255,.5)">EN</a></div></div></div></div></div>
+<nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="logo"><div class="logo-box">ТНУ</div></a>
+<ul class="nav-links"><li class="nav-item has-mega active" data-menu="univ"><button type="button" aria-expanded="false" aria-controls="menu-univ">Університет</button></li><li class="nav-item has-mega" data-menu="vstup"><button type="button" aria-expanded="false" aria-controls="menu-vstup">Вступникам</button></li><li class="nav-item has-mega" data-menu="stud"><button type="button" aria-expanded="false" aria-controls="menu-stud">Студентам</button></li><li class="nav-item has-mega" data-menu="osv"><button type="button" aria-expanded="false" aria-controls="menu-osv">Освітній процес</button></li><li class="nav-item has-mega" data-menu="nauka"><button type="button" aria-expanded="false" aria-controls="menu-nauka">Наука</button></li><li class="nav-item"><a href="international.html">Міжнародне співробітництво</a></li><li class="nav-item"><a href="news.html">Новини</a></li></ul>
+<div class="nav-right"><button class="btn-search" id="searchBtn" aria-label="Пошук"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button><a class="btn-apply" href="admission.html">Подати документи</a><button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button></div></div>
+<div class="mega-wrap" id="menu-univ"><div class="container"><div class="mega-inner cols-5"><div class="mega-col"><div class="mega-lbl">Про університет</div><div class="mega-links"><a href="about.html#istoriia">Історія</a><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a><a href="about.html#halereia">Галерея</a></div></div><div class="mega-col"><div class="mega-lbl">Керівництво</div><div class="mega-links"><a href="leadership.html#vybory-rektora">Вибори ректора</a><a href="leadership.html#vchena-rada">Вчена рада</a><a href="leadership.html#nahliadova-rada">Наглядова рада</a></div></div><div class="mega-col"><div class="mega-lbl">Документи Університету</div><div class="mega-links"><a href="documents.html#normatyvno-pravovi-dokumenty">Нормативно-правові документи</a><a href="documents.html#finansy">Фінанси</a><a href="documents.html#publichni-zakupivli">Публічні закупівлі</a><a href="documents.html#platni-posluhy">Платні послуги</a><a href="documents.html#okhorona-pratsi">Охорона праці</a><a href="documents.html#zvity-rektora">Звіти ректора</a><a href="documents.html#antykoruptsiia">Антикорупція</a></div></div><div class="mega-col"><div class="mega-lbl">Працівникам</div><div class="mega-links"><a href="staff.html#vakansii">Вакансії</a><a href="staff.html#kadrove-zabezpechennia">Кадрове забезпечення</a><a href="staff.html#atestatsiia">Атестація</a><a href="staff.html#profesiinyi-rozvytok">Професійний розвиток</a></div></div><div class="mega-col"><div class="mega-lbl">Контакти</div><div class="mega-links"><a href="contacts.html#telefonnyi-dovidnyk">Телефонний довідник</a><a href="contacts.html#hrafik-pryiomu">Графік прийому</a><a href="contacts.html#7-qr-kodiv-dii">7 QR-кодів Дії</a><a href="contacts.html#skrynka-doviry">Скринька довіри</a></div><div class="mega-address">вул. Джона Маккейна, 33<br>Київ, 01042<br>+38 (044) 529-05-16<br>gendep@tnu.edu.ua</div></div></div></div></div>
+<div class="mega-wrap" id="menu-vstup"><div class="container"><div class="mega-inner cols-6"><div class="mega-col"><div class="mega-lbl">Вступна кампанія</div><div class="mega-links"><a href="admission-rules.html#pravyla-pryiomu">Правила прийому</a><a href="admission-rules.html#perelik-spetsialnostei">Перелік спеціальностей</a></div></div><div class="mega-col"><div class="mega-lbl">Оплата навчання</div><div class="mega-links"><a href="tuition.html#vartist-navchannia">Вартість навчання</a><a href="tuition.html#derzhavnyi-hrant">Державний грант</a><a href="tuition.html#vstup-za-vaucherom">Вступ за ваучером</a></div></div><div class="mega-col"><div class="mega-lbl">Умови вступу</div><div class="mega-links"><a href="admission.html#1-kurs-pzso">1 курс (ПЗСО)</a><a href="admission.html#2-kurs-nrk5">2 курс (НРК5)</a><a href="admission.html#2-kurs-nrk6-nrk7">2 курс (НРК6, НРК7)</a><a href="admission.html#mahistratura">Магістратура</a><a href="admission.html#aspirantura-doktorantura">Аспірантура/Докторантура</a></div></div><div class="mega-col"><div class="mega-lbl">Особливі категорії вступників</div><div class="mega-links"><a href="admission-categories.html#zymovyi-vstup">Зимовий вступ</a><a href="admission-categories.html#z-tymchasovo-okupovanykh-terytorii">З тимчасово окупованих територій</a><a href="admission-categories.html#inozemtsiam">Іноземцям</a><a href="admission-categories.html#perevedennia-ponovlennia">Переведення/Поновлення</a></div></div><div class="mega-col"><div class="mega-lbl">Етапи вступу</div><div class="mega-links"><a href="admission-stages.html#prohramy-vstupnykh-vyprobuvan">Програми вступних випробувань</a><a href="admission-stages.html#hrafiky">Графіки</a><a href="admission-stages.html#rezultaty">Результати</a><a href="admission-stages.html#derzhavne-zamovlennia">Державне замовлення</a><a href="admission-stages.html#reitynhovi-spysky">Рейтингові списки</a><a href="admission-stages.html#nakazy-pro-zarakhuvannia">Накази про зарахування</a></div></div><div class="mega-col"><div class="mega-lbl">Приймальна комісія</div><div class="mega-links"><a href="admissions-office.html#kontakty">Контакти</a><a href="admissions-office.html#hrafik-roboty">Графік роботи</a><a href="admissions-office.html#sklad-komisii">Склад комісій</a><a href="admissions-office.html#polozhennia">Положення</a><a href="admissions-office.html#plan-roboty">План роботи</a><a href="admissions-office.html#rishennia">Рішення</a><a href="admissions-office.html#plan-proforiientatsiinoi-roboty">План профорієнтаційної роботи</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-stud"><div class="container"><div class="mega-inner cols-4"><div class="mega-col"><div class="mega-lbl">Навчання</div><div class="mega-links"><a href="study.html#rozklady-zaniat">Розклади занять</a><a href="study.html#hrafiky-osvitnoho-protsesu">Графіки освітнього процесу</a><a href="study.html#vybirkovi-dystsypliny">Вибіркові дисципліни</a><a href="study.html#praktyka">Практика</a><a href="study.html#pidsumkova-atestatsiia">Підсумкова атестація</a><a href="study.html#poriadok-apeliatsii">Порядок апеляції</a><a href="study.html#neformalna-informalna-osvita">Неформальна/інформальна освіта</a></div></div><div class="mega-col"><div class="mega-lbl">Студентське життя</div><div class="mega-links"><a href="student-governance.html#zakhody">Заходи</a><a href="student-governance.html#studentske-samovriaduvannia">Студентське самоврядування</a><a href="student-governance.html#hurtozhytky">Гуртожитки</a></div></div><div class="mega-col"><div class="mega-lbl">Фінанси</div><div class="mega-links"><a href="payment.html#rekvizyty-dlia-oplaty">Реквізити для оплати</a><a href="payment.html#stypendii">Стипендії</a></div></div><div class="mega-col"><div class="mega-lbl">Кар’єра</div><div class="mega-links"><a href="career.html#pratsevlashtuvannia">Працевлаштування</a><a href="career.html#pidhotovka-ofitseriv-zapasu">Підготовка офіцерів запасу</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-osv"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Освітні програми</div><div class="mega-links"><a href="education.html#kataloh-prohram">Каталог програм</a><a href="education.html#akredytatsiia">Акредитація</a><a href="education.html#haranty-osvitnikh-prohram">Гаранти освітніх програм</a></div></div><div class="mega-col"><div class="mega-lbl">Якість освіти</div><div class="mega-links"><a href="quality.html#rada-iakosti-osvity">Рада якості освіти</a><a href="quality.html#monitorynh-iakosti-osvity">Моніторинг якості освіти</a><a href="quality.html#akademichna-dobrochesnist">Академічна доброчесність</a></div></div><div class="mega-col"><div class="mega-lbl">Нормативні документи</div><div class="mega-links"><a href="regulations.html#zakonodavstvo">Законодавство</a><a href="regulations.html#polozhennia">Положення</a><a href="regulations.html#nakazy">Накази</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-nauka"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Наукова діяльність</div><div class="mega-links"><a href="science.html#naukova-tema">Наукова тема</a><a href="science.html#periodychni-vydannia">Періодичні видання</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові ради</div><div class="mega-links"><a href="science-councils.html#spetsializovani-vcheni-rady">Спеціалізовані вчені ради</a><a href="science-councils.html#rada-molodykh-vchenykh">Рада молодих вчених</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові заходи</div><div class="mega-links"><a href="science-events.html#anons-konferentsii">Анонс конференцій</a><a href="science-events.html#materialy-konferentsii">Матеріали конференцій</a><a href="science-events.html#hrafik-zakhodiv">Графік заходів</a></div></div></div></div></div>
+</nav>
+<div class="search-panel" id="searchPanel"><div class="container"><form class="search-panel-inner" action="search.html" method="get"><input class="search-panel-input" id="searchPanelInput" name="q" type="text" placeholder="Пошук по сайту..." autocomplete="off"><button class="search-panel-close" id="searchPanelClose" type="button" aria-label="Закрити">×</button></form></div></div>
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-menu" id="mobMenu"><div class="mob-head"><div class="mob-logo"><div class="mob-logo-box">ТНУ</div><div class="mob-logo-label">Таврійський<br>національний</div></div><button class="mob-close" id="mobClose" aria-label="Закрити">×</button></div>
+<div class="mob-nav"><div class="mob-item"><div class="mob-item-head" data-mob="univ">Університет<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-univ"><div class="mob-sub-group"><a href="about.html">Про університет</a><a href="leadership.html">Керівництво</a><a href="documents.html">Документи Університету</a><a href="staff.html">Працівникам</a><a href="contacts.html">Контакти</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="vstup">Вступникам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-vstup"><div class="mob-sub-group"><a href="admission-rules.html">Вступна кампанія</a><a href="tuition.html">Оплата навчання</a><a href="admission.html">Умови вступу</a><a href="admission-categories.html">Особливі категорії вступників</a><a href="admission-stages.html">Етапи вступу</a><a href="admissions-office.html">Приймальна комісія</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="stud">Студентам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-stud"><div class="mob-sub-group"><a href="study.html">Навчання</a><a href="student-governance.html">Студентське життя</a><a href="payment.html">Фінанси</a><a href="career.html">Кар’єра</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="osv">Освітній процес<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-osv"><div class="mob-sub-group"><a href="education.html">Освітні програми</a><a href="quality.html">Якість освіти</a><a href="regulations.html">Нормативні документи</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="nauka">Наука<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-nauka"><div class="mob-sub-group"><a href="science.html">Наукова діяльність</a><a href="science-councils.html">Наукові ради</a><a href="science-events.html">Наукові заходи</a></div></div></div><div class="mob-item"><div class="mob-item-head"><a href="international.html">Міжнародне співробітництво</a></div></div><div class="mob-item"><div class="mob-item-head"><a href="news.html">Новини</a></div></div></div>
+<div class="mob-footer-block"><a class="mob-apply-btn" href="admission.html">Подати документи</a></div></div>
+<!--/TOP-->
+
+
+
+
+
+
+
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb"><div class="container">
+  <a href="index.html">ТНУ</a><span>/</span>
+  <b style="font-weight:400">Університет</b><span>/</span>
+  <span style="color:var(--text)">Центр реінтеграції та розвитку Криму</span>
+</div></div>
+
+<!-- HERO -->
+<div class="center-hero">
+  <div class="container">
+    <div class="hero-badge">Структурний підрозділ ТНУ</div>
+    <h1>Центр реінтеграції та розвитку Криму</h1>
+    <div class="hero-slogan">
+      Крим — це Україна!
+      <span class="hero-flag"><span class="f-blue"></span><span class="f-yellow"></span></span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN BODY -->
+<div class="center-body">
+  <div class="container">
+    <div class="center-layout">
+
+      <!-- CONTENT -->
+      <div class="center-content">
+
+        <!-- VISION -->
+        <div class="section-block">
+          <h2>Про Центр</h2>
+          <p>Центр реінтеграції та розвитку Криму — структурний підрозділ Таврійського національного університету імені В. І. Вернадського, створений рішенням Вченої ради 30 січня 2024 року. Положення про Центр затверджено наказом ректора №42-ОД від 26 березня 2024 року.</p>
+
+          <div class="quote-label">Візія</div>
+          <div class="quote-block">
+            <p>Центр реінтеграції та розвитку Криму є ефективним інструментом формування та реалізації політики реінтеграції й подальшого розвитку Кримського півострова.</p>
+          </div>
+
+          <div class="quote-label">Місія</div>
+          <div class="quote-block">
+            <p>Бути ініціатором формування, розробки та підготовки умов, інструментів та кадрів для забезпечення процесу реінтеграції та подальшого розвитку деокупованого Криму.</p>
+          </div>
+
+          <div class="info-chips">
+            <div class="info-chip"><div class="info-chip-label">Рішення Вченої ради</div><div class="info-chip-val">30 січня 2024 р.</div></div>
+            <div class="info-chip"><div class="info-chip-label">Наказ ректора</div><div class="info-chip-val">№42-ОД від 26.03.2024</div></div>
+            <div class="info-chip"><div class="info-chip-label">Термін дії</div><div class="info-chip-val">До 1 липня 2034 р.</div></div>
+          </div>
+        </div>
+
+        <!-- ACTIVITIES -->
+        <div class="section-block">
+          <h2>Основні напрями діяльності</h2>
+          <p>Центр здійснює комплексну роботу за чотирма ключовими напрямами, що охоплюють наукову, освітню та суспільну сфери:</p>
+          <ul class="activities-list">
+            <li>Освітня діяльність — підготовка фахівців та кадрів для майбутньої реінтеграції Криму</li>
+            <li>Наукові дослідження — вивчення проблем деокупації, розробка інструментів та механізмів реінтеграції</li>
+            <li>Громадська просвіта — інформування суспільства, проведення публічних заходів та дискусій</li>
+            <li>Програми деокупації та розвитку — розробка конкретних програм для деокупованого Криму</li>
+          </ul>
+        </div>
+
+        <!-- GALLERY -->
+        <div class="section-block">
+          <h2>Фотогалерея</h2>
+          <div class="gallery-strip">
+            <img src="https://tnu.edu.ua/wp-content/uploads/2024/03/IMG_20240307_163528_261-1024x1024.jpg" alt="Центр реінтеграції Криму — захід" onclick="openLb(this.src)">
+            <img src="https://tnu.edu.ua/wp-content/uploads/2024/03/IMG_20240307_163537_207-1024x1024.jpg" alt="Центр реінтеграції Криму — зустріч" onclick="openLb(this.src)">
+            <img src="https://tnu.edu.ua/wp-content/uploads/2024/03/IMG_20240307_163532_152-1024x1024.jpg" alt="Центр реінтеграції Криму" onclick="openLb(this.src)">
+          </div>
+        </div>
+
+      </div><!-- /content -->
+
+      <!-- SIDEBAR -->
+      <div class="center-sidebar">
+
+        <!-- CONTACTS -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-head"><h4>Контакти</h4></div>
+          <div class="sidebar-card-body">
+            <div class="contact-row">вул. Джона Маккейна, 33, Київ, 01042</div>
+            <div class="contact-row"><a href="tel:+380445290516">+38 (044) 529-05-16</a></div>
+            <div class="contact-row"><a href="mailto:crimea.tnu@gmail.com">crimea.tnu@gmail.com</a></div>
+            <div class="contact-row"><a href="mailto:gendep@tnu.edu.ua">gendep@tnu.edu.ua</a></div>
+            <div class="contact-row">Пн–Пт: 9:00–17:00</div>
+          </div>
+        </div>
+
+        <!-- DOCUMENTS -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-head"><h4>Основні документи</h4></div>
+          <div class="sidebar-card-body">
+            <a href="https://tnu.edu.ua/wp-content/uploads/2024/04/Положення-про-Центр-реінтеграції-та-розвитку-Криму-1.pdf" target="_blank" class="doc-link">
+              <div class="doc-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              Положення про Центр реінтеграції та розвитку Криму
+            </a>
+            <a href="https://tnu.edu.ua/wp-content/uploads/2024/04/Наказ-від-26.03.2024-№42-ОД-1.pdf" target="_blank" class="doc-link">
+              <div class="doc-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              Наказ №42-ОД від 26.03.2024
+            </a>
+          </div>
+        </div>
+
+        <!-- SLOGAN CARD -->
+        <div style="background:var(--navy);border-radius:6px;padding:20px 22px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px;">Гасло Центру</div>
+          <div style="font-size:18px;font-weight:700;color:#fff;line-height:1.3;">Крим — це Україна!</div>
+          <div style="display:flex;justify-content:center;gap:0;margin-top:12px;">
+            <div style="width:48px;height:26px;background:#005BBB;border-radius:4px 0 0 4px;"></div>
+            <div style="width:48px;height:26px;background:#FFD500;border-radius:0 4px 4px 0;"></div>
+          </div>
+        </div>
+
+      </div><!-- /sidebar -->
+    </div>
+  </div>
+</div>
+
+<!-- STAFF SECTION -->
+<div class="staff-section" style="background:var(--gray);padding:56px 0 72px;">
+  <div class="container">
+    <div class="staff-section-title">Персональний склад Координаційної ради</div>
+    <div class="staff-section-sub">Керівництво та координатори Центру реінтеграції та розвитку Криму</div>
+
+    <!-- LEADS: co-coordinators + secretary -->
+    <div class="staff-leads">
+      <div class="staff-card">
+        <img class="staff-card-img" src="https://tnu.edu.ua/wp-content/uploads/2023/08/Юксель.jpg" alt="Юксель Гаяна Заірівна" onerror="this.style.background='var(--border)'">
+        <div class="staff-card-body">
+          <div class="staff-role">Со-координатор</div>
+          <div class="staff-name">Юксель Гаяна Заірівна</div>
+          <div class="staff-desc">Доктор наук із соціальних комунікацій, доцент кафедри журналістики, член Меджлісу кримськотатарського народу</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <img class="staff-card-img" src="https://tnu.edu.ua/wp-content/uploads/2024/04/щекун.jpg" alt="Щекун Андрій Степанович" onerror="this.style.background='var(--border)'">
+        <div class="staff-card-body">
+          <div class="staff-role">Со-координатор</div>
+          <div class="staff-name">Щекун Андрій Степанович</div>
+          <div class="staff-desc">Експерт мережі «Кримська платформа», представник Ради українців, головний редактор газети</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <img class="staff-card-img" src="https://tnu.edu.ua/wp-content/uploads/2023/08/Нестеренко.jpeg" alt="Нестеренко Олеся Анатоліївна" onerror="this.style.background='var(--border)'">
+        <div class="staff-card-body">
+          <div class="staff-role">Секретар</div>
+          <div class="staff-name">Нестеренко Олеся Анатоліївна</div>
+          <div class="staff-desc">Старший викладач кафедри журналістики Інституту філології та журналістики ТНУ</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COUNCIL MEMBERS -->
+    <div class="council-title">Члени Координаційної ради</div>
+    <div class="council-grid">
+      <div class="council-card">
+        <img class="council-photo" src="https://tnu.edu.ua/wp-content/uploads/2024/04/потапова.jpg" alt="Потапова Валентина Іванівна" onerror="this.style.background='var(--border)'">
+        <div class="council-info">
+          <div class="council-name">Потапова Валентина Іванівна</div>
+          <div class="council-pos">Директор із питань освітньої адвокації</div>
+        </div>
+      </div>
+      <div class="council-card">
+        <img class="council-photo" src="https://tnu.edu.ua/wp-content/uploads/2024/04/смэлянський.jpg" alt="Смелянський Юрій Леонідович" onerror="this.style.background='var(--border)'">
+        <div class="council-info">
+          <div class="council-name">Смелянський Юрій Леонідович</div>
+          <div class="council-pos">Експерт із питань тимчасово окупованих територій</div>
+        </div>
+      </div>
+      <div class="council-card">
+        <img class="council-photo" src="https://tnu.edu.ua/wp-content/uploads/2024/04/ковальський.jpg" alt="Ковальський Сергій Анатолійович" onerror="this.style.background='var(--border)'">
+        <div class="council-info">
+          <div class="council-name">Ковальський Сергій Анатолійович</div>
+          <div class="council-pos">Керівник організації бізнесового та культурного співробітництва</div>
+        </div>
+      </div>
+      <div class="council-card">
+        <img class="council-photo" src="https://tnu.edu.ua/wp-content/uploads/2024/04/ляшенко.jpg" alt="Ляшенко Володимир Іванович" onerror="this.style.background='var(--border)'">
+        <div class="council-info">
+          <div class="council-name">Ляшенко Володимир Іванович</div>
+          <div class="council-pos">Представник Національної ради</div>
+        </div>
+      </div>
+      <div class="council-card">
+        <img class="council-photo" src="https://tnu.edu.ua/wp-content/uploads/2022/09/Омецинська-2.jpg" alt="Омецинська Наталія В'ячеславівна" onerror="this.style.background='var(--border)'">
+        <div class="council-info">
+          <div class="council-name">Омецинська Наталія В'ячеславівна</div>
+          <div class="council-pos">Завідувач кафедри інженерних дисциплін</div>
+        </div>
+      </div>
+      <div class="council-card">
+        <img class="council-photo" src="https://tnu.edu.ua/wp-content/uploads/2023/03/Шарагіна.jpg" alt="Шарагіна Ольга Володимирівна" onerror="this.style.background='var(--border)'">
+        <div class="council-info">
+          <div class="council-name">Шарагіна Ольга Володимирівна</div>
+          <div class="council-pos">Директор Інституту філології та журналістики</div>
+        </div>
+      </div>
+      <div class="council-card">
+        <img class="council-photo" src="https://tnu.edu.ua/wp-content/uploads/2021/12/Bessarab.jpg" alt="Бессараб Олександр Володимирович" onerror="this.style.background='var(--border)'">
+        <div class="council-info">
+          <div class="council-name">Бессараб Олександр Володимирович</div>
+          <div class="council-pos">Проректор з науки та інновацій ТНУ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--BOTTOM-->
+<footer class="footer"><div class="container"><div class="footer-grid">
+<div><div class="footer-logo"><div class="footer-logo-box">ТНУ</div><div><div class="footer-logo-top">Таврійський національний університет</div><div class="footer-logo-bot">імені В. І. Вернадського</div></div></div><p class="footer-desc">Кримський університет у центрі Києва.</p></div>
+<div><h4>Університет</h4><ul><li><a href="about.html">Про університет</a></li><li><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a></li><li><a href="leadership.html">Керівництво</a></li><li><a href="documents.html">Документи Університету</a></li></ul></div>
+<div><h4>Навчання</h4><ul><li><a href="programs.html">Освітні програми</a></li><li><a href="admission.html">Умови вступу</a></li><li><a href="study.html#rozklady-zaniat">Розклад</a></li><li><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a></li></ul></div>
+<div><h4>Контакти</h4><ul><li><a href="contacts.html">вул. Джона Маккейна, 33, Київ</a></li><li><a href="tel:+380445290516">+38 (044) 529-05-16</a></li><li><a href="mailto:gendep@tnu.edu.ua">gendep@tnu.edu.ua</a></li><li><a href="https://tnu.edu.ua/poryadok-suprovodu-nadannya-dopomogi/" target="_blank" rel="noopener">Супровід осіб з інвалідністю</a></li></ul></div>
+</div><div class="footer-bottom"><span>© 2026 Таврійський національний університет імені В. І. Вернадського</span><span>Усі права захищені</span></div></div></footer>
+<!--/BOTTOM-->
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''">×</button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+</div>
+
+<script>
+// Lightbox
+function openLb(src){
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+document.getElementById('lightbox').addEventListener('click', function(e){
+  if(e.target === this){ this.classList.remove('open'); document.body.style.overflow=''; }
+});
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }});
+
+// Search
+const searchBtn = document.getElementById('searchBtn');
+const searchPanel = document.getElementById('searchPanel');
+const searchInput = document.getElementById('searchPanelInput');
+document.getElementById('searchPanelClose').addEventListener('click', ()=>searchPanel.classList.remove('open'));
+searchBtn.addEventListener('click', ()=>{
+  const o=searchPanel.classList.toggle('open');
+  if(o){searchPanel.style.top=document.getElementById('navbar').getBoundingClientRect().bottom+'px';setTimeout(()=>searchInput.focus(),50);}
+});
+
+// Mobile menu
+const burger = document.getElementById('navBurger');
+const mobMenu = document.getElementById('mobMenu');
+const mobOverlay = document.getElementById('mobOverlay');
+burger.addEventListener('click',()=>{mobMenu.classList.add('open');mobOverlay.classList.add('open');burger.classList.add('open');document.body.style.overflow='hidden';});
+[document.getElementById('mobClose'),mobOverlay].forEach(el=>el.addEventListener('click',()=>{mobMenu.classList.remove('open');mobOverlay.classList.remove('open');burger.classList.remove('open');document.body.style.overflow='';}));
+</script>
+<script src="site.js"></script>
+<script src="accent.js"></script>
+</body>
+</html>

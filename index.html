@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Тест · Таврійський національний університет імені В. І. Вернадського</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1C2B4A;
+  --gray:#F0F2F5;
+  --white:#FFFFFF;
+  --text:#1A1A1A;
+  --muted:#6B7280;
+  --border:#D8DCE4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.65;color:var(--text);background:#fff;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+.hero{
+  position:relative;
+  min-height:88vh;
+  display:flex;
+  align-items:center;
+  background:#000;
+  margin-bottom:-2px;
+  overflow:hidden;
+  isolation:isolate;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+}
+.hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:1;
+  -webkit-filter:brightness(0.5);
+  filter:brightness(0.5);
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  z-index:2;
+  pointer-events:none;
+  will-change:opacity;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+}
+.hero>.container{position:relative;z-index:3;max-width:none;width:100%;padding-left:clamp(48px,6vw,100px);padding-right:0;}
+.hero-content{position:relative;z-index:3;width:min(520px,46%);text-align:left;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.58);margin-bottom:18px;}
+.hero h1{font-size:52px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.5px;margin-bottom:20px;}
+.hero-para{font-size:17px;color:rgba(255,255,255,.8);line-height:1.65;margin-bottom:36px;max-width:540px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-fill{height:40px;padding:0 20px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;border:1px solid var(--navy);transition:background .15s;display:inline-flex;align-items:center;}
+.btn-fill:hover{background:#111e33;}
+.btn-outline{height:40px;padding:0 20px;background:#fff;color:var(--text);font-size:14px;font-weight:600;border:1px solid var(--navy);transition:background .15s,color .15s;display:inline-flex;align-items:center;}
+.btn-outline:hover{background:var(--navy);color:#fff;}
+.hero .btn-fill{background:#fff;color:var(--text);border-color:#fff;}
+.hero .btn-fill:hover{background:rgba(255,255,255,.88);}
+.hero .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.55);}
+.hero .btn-outline:hover{background:rgba(255,255,255,.12);border-color:#fff;}
+.tabbar-wrap{background:#fff;border-top:none;border-bottom:none;}
+.quicklinks-wrap{background:#fff;border-bottom:1px solid var(--border);}
+.tabbar-inner{height:52px;display:flex;align-items:center;justify-content:space-between;}
+.tabs{display:flex;height:52px;}
+.tab{height:52px;padding:0 22px;font-size:15px;font-weight:500;color:var(--muted);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s;white-space:nowrap;}
+.tab:first-child{padding-left:0;}
+.tab.active{color:var(--text);font-weight:600;border-bottom-color:var(--navy);}
+.tab:hover{color:var(--text);}
+.tabs-more{font-size:13px;color:var(--muted);}
+.tabs-more:hover{color:var(--text);text-decoration:underline;}
+.quicklinks-wrap{background:#fff;border-bottom:1px solid var(--border);}
+.quicklinks{padding:13px 0;display:none;align-items:center;flex-wrap:wrap;font-size:14px;}
+.quicklinks.active{display:flex;}
+.quicklinks a{color:var(--text);font-weight:500;padding:0 14px;position:relative;}
+.quicklinks a:first-child{padding-left:0;}
+.quicklinks a+a::before{content:"·";position:absolute;left:-1px;color:var(--muted);}
+.quicklinks a:hover{text-decoration:underline;}
+.main{padding:64px 0;background:#fff;}
+.main-grid{display:grid;grid-template-columns:1fr 340px;gap:56px;align-items:start;}
+.section-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.section-head h2{font-size:26px;font-weight:700;color:var(--text);}
+.section-link{font-size:13px;font-weight:600;color:var(--text);}
+.section-link:hover{text-decoration:underline;}
+.news-featured{padding:22px 0;border-bottom:1px solid var(--border);}
+.news-featured-img{aspect-ratio:16/9;background:var(--gray);margin-bottom:14px;overflow:hidden;}
+.news-featured-img img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;}
+.ph-text{font-size:11px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;}
+.news-meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:500;margin-bottom:7px;}
+.news-featured-title{font-size:21px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:9px;display:block;}
+.news-featured-title:hover{text-decoration:underline;}
+.news-excerpt{font-size:14px;color:var(--muted);line-height:1.55;}
+.news-item{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);align-items:start;}
+.news-item-img{aspect-ratio:4/3;background:var(--gray);overflow:hidden;}
+.news-item-img img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;}
+.news-item-text{display:flex;flex-direction:column;gap:5px;}
+.news-title{font-size:16px;font-weight:600;color:var(--text);line-height:1.35;display:block;}
+.news-title:hover{text-decoration:underline;}
+.news-all{display:inline-block;margin-top:16px;font-size:14px;font-weight:600;color:var(--text);}
+.news-all:hover{text-decoration:underline;}
+.sidebar{display:flex;flex-direction:column;gap:28px;}
+.box-head{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--border);}
+.box-link-all{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:var(--text);}
+.box-link-all:hover{text-decoration:underline;}
+.ann-item{padding:10px 0;border-bottom:1px solid var(--border);}
+.ann-item:last-child{border-bottom:none;}
+.ann-date{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px;}
+.ann-title{font-size:14px;font-weight:500;color:var(--text);line-height:1.4;display:block;}
+.ann-title:hover{text-decoration:underline;}
+.ev-item{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:start;}
+.ev-item:last-child{border-bottom:none;}
+.ev-date{text-align:center;}
+.ev-day{font-size:19px;font-weight:700;color:var(--text);line-height:1;}
+.ev-month{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
+.ev-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;display:block;}
+.ev-title:hover{text-decoration:underline;}
+.ev-loc{font-size:12px;color:var(--muted);margin-top:2px;}
+.qa-section{padding-top:28px;grid-column:1/-1;}
+.qa-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.qa-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);}
+.qa-item{padding:32px 16px;border-right:1px solid var(--border);font-size:14px;color:var(--text);font-weight:500;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s;line-height:1.3;}
+.qa-item:last-child{border-right:none;}
+.qa-item:hover{background:var(--gray);text-decoration:underline;}
+.qa-arr{color:var(--muted);flex-shrink:0;}
+.programs-prev{background:var(--navy);padding:64px 0;}
+.prog-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:24px;}
+.prog-head h2{font-size:26px;font-weight:700;color:#fff;}
+.prog-search{height:38px;padding:0 14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);font-family:inherit;font-size:14px;color:#fff;width:230px;}
+.prog-search::placeholder{color:rgba(255,255,255,.38);}
+.prog-search:focus{outline:none;border-color:rgba(255,255,255,.5);}
+.prog-list{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-bottom:none;display:grid;grid-template-columns:1fr 1fr;}
+.prog-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 20px;border-bottom:1px solid rgba(255,255,255,.08);transition:background .15s;}
+.prog-row:hover{background:rgba(255,255,255,.1);}
+.prog-row:hover .prog-name{text-decoration:underline;}
+.prog-name{font-size:15px;font-weight:600;color:#fff;}
+.prog-inst{font-size:12px;color:rgba(255,255,255,.48);text-align:right;}
+.prog-all{display:inline-block;margin-top:18px;font-size:14px;font-weight:600;color:rgba(255,255,255,.82);}
+.prog-all:hover{text-decoration:underline;color:#fff;}
+@media(max-width:1024px){.hero{min-height:80vh;}
+.hero h1{font-size:40px;}
+.main-grid{grid-template-columns:1fr 260px;gap:36px;}
+.qa-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){.container{padding:0 16px;}
+.hero{min-height:72vh;padding:52px 0;}
+.hero>.container{padding-left:20px;padding-right:20px;}
+.hero-content{width:100%;}
+.hero h1{font-size:30px;letter-spacing:-.2px;margin-bottom:14px;}
+.hero-para{font-size:15px;margin-bottom:24px;}
+.hero-eyebrow{margin-bottom:10px;}
+.btn-fill,.btn-outline{height:40px;font-size:13px;padding:0 16px;}
+.tabbar-inner{height:auto;padding:0 16px;flex-direction:column;align-items:stretch;}
+.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;height:48px;justify-content:center;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{white-space:nowrap;flex-shrink:0;height:48px;font-size:14px;padding:0 18px;}
+.tab:first-child{padding-left:18px;}
+.tabs-more{display:none;}
+.quicklinks{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:10px 0;}
+.quicklinks::-webkit-scrollbar{display:none;}
+.quicklinks a{white-space:nowrap;flex-shrink:0;}
+.main{padding:28px 0;}
+.main-grid{grid-template-columns:1fr;gap:28px;}
+.sidebar{gap:20px;}
+.news-item{grid-template-columns:84px 1fr;gap:10px;}
+.news-featured-title{font-size:17px;}
+.section-head h2{font-size:20px;}
+.qa-grid{grid-template-columns:repeat(2,1fr);}
+.qa-item{font-size:12px;padding:12px 10px;}
+.programs-prev{padding:32px 0;}
+.prog-head{flex-direction:column;align-items:flex-start;gap:12px;}
+.prog-search{width:100%;}
+.prog-list{grid-template-columns:1fr;}}
+@media(min-width:1440px){.container{max-width:1360px;}
+.hero h1{font-size:62px;}}
+.btn-fill,.btn-outline{border-radius:6px;}
+</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="accent.css">
+</head>
+<body>
+
+<!--TOP-->
+<div class="utility"><div class="container"><div class="utility-inner"><span class="utility-name">Таврійський національний університет імені В. І. Вернадського</span>
+<div class="utility-right"><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a><a class="u-long" href="crimea-center.html">Центр реінтеграції та розвитку Криму</a><a href="study.html#rozklady-zaniat">Розклад</a><div class="utility-sep"></div><div class="utility-lang"><b>UA</b> <span>|</span> <a href="#" style="color:rgba(255,255,255,.5)">EN</a></div></div></div></div></div>
+<nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="logo"><div class="logo-box">ТНУ</div></a>
+<ul class="nav-links"><li class="nav-item has-mega" data-menu="univ"><button type="button" aria-expanded="false" aria-controls="menu-univ">Університет</button></li><li class="nav-item has-mega" data-menu="vstup"><button type="button" aria-expanded="false" aria-controls="menu-vstup">Вступникам</button></li><li class="nav-item has-mega" data-menu="stud"><button type="button" aria-expanded="false" aria-controls="menu-stud">Студентам</button></li><li class="nav-item has-mega" data-menu="osv"><button type="button" aria-expanded="false" aria-controls="menu-osv">Освітній процес</button></li><li class="nav-item has-mega" data-menu="nauka"><button type="button" aria-expanded="false" aria-controls="menu-nauka">Наука</button></li><li class="nav-item"><a href="international.html">Міжнародне співробітництво</a></li><li class="nav-item"><a href="news.html">Новини</a></li></ul>
+<div class="nav-right"><button class="btn-search" id="searchBtn" aria-label="Пошук"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button><a class="btn-apply" href="admission.html">Подати документи</a><button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button></div></div>
+<div class="mega-wrap" id="menu-univ"><div class="container"><div class="mega-inner cols-5"><div class="mega-col"><div class="mega-lbl">Про університет</div><div class="mega-links"><a href="about.html#istoriia">Історія</a><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a><a href="about.html#halereia">Галерея</a></div></div><div class="mega-col"><div class="mega-lbl">Керівництво</div><div class="mega-links"><a href="leadership.html#vybory-rektora">Вибори ректора</a><a href="leadership.html#vchena-rada">Вчена рада</a><a href="leadership.html#nahliadova-rada">Наглядова рада</a></div></div><div class="mega-col"><div class="mega-lbl">Документи Університету</div><div class="mega-links"><a href="documents.html#normatyvno-pravovi-dokumenty">Нормативно-правові документи</a><a href="documents.html#finansy">Фінанси</a><a href="documents.html#publichni-zakupivli">Публічні закупівлі</a><a href="documents.html#platni-posluhy">Платні послуги</a><a href="documents.html#okhorona-pratsi">Охорона праці</a><a href="documents.html#zvity-rektora">Звіти ректора</a><a href="documents.html#antykoruptsiia">Антикорупція</a></div></div><div class="mega-col"><div class="mega-lbl">Працівникам</div><div class="mega-links"><a href="staff.html#vakansii">Вакансії</a><a href="staff.html#kadrove-zabezpechennia">Кадрове забезпечення</a><a href="staff.html#atestatsiia">Атестація</a><a href="staff.html#profesiinyi-rozvytok">Професійний розвиток</a></div></div><div class="mega-col"><div class="mega-lbl">Контакти</div><div class="mega-links"><a href="contacts.html#telefonnyi-dovidnyk">Телефонний довідник</a><a href="contacts.html#hrafik-pryiomu">Графік прийому</a><a href="contacts.html#7-qr-kodiv-dii">7 QR-кодів Дії</a><a href="contacts.html#skrynka-doviry">Скринька довіри</a></div><div class="mega-address">вул. Джона Маккейна, 33<br>Київ, 01042<br>+38 (044) 529-05-16<br>gendep@tnu.edu.ua</div></div></div></div></div>
+<div class="mega-wrap" id="menu-vstup"><div class="container"><div class="mega-inner cols-6"><div class="mega-col"><div class="mega-lbl">Вступна кампанія</div><div class="mega-links"><a href="admission-rules.html#pravyla-pryiomu">Правила прийому</a><a href="admission-rules.html#perelik-spetsialnostei">Перелік спеціальностей</a></div></div><div class="mega-col"><div class="mega-lbl">Оплата навчання</div><div class="mega-links"><a href="tuition.html#vartist-navchannia">Вартість навчання</a><a href="tuition.html#derzhavnyi-hrant">Державний грант</a><a href="tuition.html#vstup-za-vaucherom">Вступ за ваучером</a></div></div><div class="mega-col"><div class="mega-lbl">Умови вступу</div><div class="mega-links"><a href="admission.html#1-kurs-pzso">1 курс (ПЗСО)</a><a href="admission.html#2-kurs-nrk5">2 курс (НРК5)</a><a href="admission.html#2-kurs-nrk6-nrk7">2 курс (НРК6, НРК7)</a><a href="admission.html#mahistratura">Магістратура</a><a href="admission.html#aspirantura-doktorantura">Аспірантура/Докторантура</a></div></div><div class="mega-col"><div class="mega-lbl">Особливі категорії вступників</div><div class="mega-links"><a href="admission-categories.html#zymovyi-vstup">Зимовий вступ</a><a href="admission-categories.html#z-tymchasovo-okupovanykh-terytorii">З тимчасово окупованих територій</a><a href="admission-categories.html#inozemtsiam">Іноземцям</a><a href="admission-categories.html#perevedennia-ponovlennia">Переведення/Поновлення</a></div></div><div class="mega-col"><div class="mega-lbl">Етапи вступу</div><div class="mega-links"><a href="admission-stages.html#prohramy-vstupnykh-vyprobuvan">Програми вступних випробувань</a><a href="admission-stages.html#hrafiky">Графіки</a><a href="admission-stages.html#rezultaty">Результати</a><a href="admission-stages.html#derzhavne-zamovlennia">Державне замовлення</a><a href="admission-stages.html#reitynhovi-spysky">Рейтингові списки</a><a href="admission-stages.html#nakazy-pro-zarakhuvannia">Накази про зарахування</a></div></div><div class="mega-col"><div class="mega-lbl">Приймальна комісія</div><div class="mega-links"><a href="admissions-office.html#kontakty">Контакти</a><a href="admissions-office.html#hrafik-roboty">Графік роботи</a><a href="admissions-office.html#sklad-komisii">Склад комісій</a><a href="admissions-office.html#polozhennia">Положення</a><a href="admissions-office.html#plan-roboty">План роботи</a><a href="admissions-office.html#rishennia">Рішення</a><a href="admissions-office.html#plan-proforiientatsiinoi-roboty">План профорієнтаційної роботи</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-stud"><div class="container"><div class="mega-inner cols-4"><div class="mega-col"><div class="mega-lbl">Навчання</div><div class="mega-links"><a href="study.html#rozklady-zaniat">Розклади занять</a><a href="study.html#hrafiky-osvitnoho-protsesu">Графіки освітнього процесу</a><a href="study.html#vybirkovi-dystsypliny">Вибіркові дисципліни</a><a href="study.html#praktyka">Практика</a><a href="study.html#pidsumkova-atestatsiia">Підсумкова атестація</a><a href="study.html#poriadok-apeliatsii">Порядок апеляції</a><a href="study.html#neformalna-informalna-osvita">Неформальна/інформальна освіта</a></div></div><div class="mega-col"><div class="mega-lbl">Студентське життя</div><div class="mega-links"><a href="student-governance.html#zakhody">Заходи</a><a href="student-governance.html#studentske-samovriaduvannia">Студентське самоврядування</a><a href="student-governance.html#hurtozhytky">Гуртожитки</a></div></div><div class="mega-col"><div class="mega-lbl">Фінанси</div><div class="mega-links"><a href="payment.html#rekvizyty-dlia-oplaty">Реквізити для оплати</a><a href="payment.html#stypendii">Стипендії</a></div></div><div class="mega-col"><div class="mega-lbl">Кар’єра</div><div class="mega-links"><a href="career.html#pratsevlashtuvannia">Працевлаштування</a><a href="career.html#pidhotovka-ofitseriv-zapasu">Підготовка офіцерів запасу</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-osv"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Освітні програми</div><div class="mega-links"><a href="education.html#kataloh-prohram">Каталог програм</a><a href="education.html#akredytatsiia">Акредитація</a><a href="education.html#haranty-osvitnikh-prohram">Гаранти освітніх програм</a></div></div><div class="mega-col"><div class="mega-lbl">Якість освіти</div><div class="mega-links"><a href="quality.html#rada-iakosti-osvity">Рада якості освіти</a><a href="quality.html#monitorynh-iakosti-osvity">Моніторинг якості освіти</a><a href="quality.html#akademichna-dobrochesnist">Академічна доброчесність</a></div></div><div class="mega-col"><div class="mega-lbl">Нормативні документи</div><div class="mega-links"><a href="regulations.html#zakonodavstvo">Законодавство</a><a href="regulations.html#polozhennia">Положення</a><a href="regulations.html#nakazy">Накази</a></div></div></div></div></div>
+<div class="mega-wrap" id="menu-nauka"><div class="container"><div class="mega-inner cols-3"><div class="mega-col"><div class="mega-lbl">Наукова діяльність</div><div class="mega-links"><a href="science.html#naukova-tema">Наукова тема</a><a href="science.html#periodychni-vydannia">Періодичні видання</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові ради</div><div class="mega-links"><a href="science-councils.html#spetsializovani-vcheni-rady">Спеціалізовані вчені ради</a><a href="science-councils.html#rada-molodykh-vchenykh">Рада молодих вчених</a></div></div><div class="mega-col"><div class="mega-lbl">Наукові заходи</div><div class="mega-links"><a href="science-events.html#anons-konferentsii">Анонс конференцій</a><a href="science-events.html#materialy-konferentsii">Матеріали конференцій</a><a href="science-events.html#hrafik-zakhodiv">Графік заходів</a></div></div></div></div></div>
+</nav>
+<div class="search-panel" id="searchPanel"><div class="container"><form class="search-panel-inner" action="search.html" method="get"><input class="search-panel-input" id="searchPanelInput" name="q" type="text" placeholder="Пошук по сайту..." autocomplete="off"><button class="search-panel-close" id="searchPanelClose" type="button" aria-label="Закрити">×</button></form></div></div>
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-menu" id="mobMenu"><div class="mob-head"><div class="mob-logo"><div class="mob-logo-box">ТНУ</div><div class="mob-logo-label">Таврійський<br>національний</div></div><button class="mob-close" id="mobClose" aria-label="Закрити">×</button></div>
+<div class="mob-nav"><div class="mob-item"><div class="mob-item-head" data-mob="univ">Університет<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-univ"><div class="mob-sub-group"><a href="about.html">Про університет</a><a href="leadership.html">Керівництво</a><a href="documents.html">Документи Університету</a><a href="staff.html">Працівникам</a><a href="contacts.html">Контакти</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="vstup">Вступникам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-vstup"><div class="mob-sub-group"><a href="admission-rules.html">Вступна кампанія</a><a href="tuition.html">Оплата навчання</a><a href="admission.html">Умови вступу</a><a href="admission-categories.html">Особливі категорії вступників</a><a href="admission-stages.html">Етапи вступу</a><a href="admissions-office.html">Приймальна комісія</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="stud">Студентам<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-stud"><div class="mob-sub-group"><a href="study.html">Навчання</a><a href="student-governance.html">Студентське життя</a><a href="payment.html">Фінанси</a><a href="career.html">Кар’єра</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="osv">Освітній процес<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-osv"><div class="mob-sub-group"><a href="education.html">Освітні програми</a><a href="quality.html">Якість освіти</a><a href="regulations.html">Нормативні документи</a></div></div></div><div class="mob-item"><div class="mob-item-head" data-mob="nauka">Наука<span class="mob-chev"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div><div class="mob-sub" id="mob-nauka"><div class="mob-sub-group"><a href="science.html">Наукова діяльність</a><a href="science-councils.html">Наукові ради</a><a href="science-events.html">Наукові заходи</a></div></div></div><div class="mob-item"><div class="mob-item-head"><a href="international.html">Міжнародне співробітництво</a></div></div><div class="mob-item"><div class="mob-item-head"><a href="news.html">Новини</a></div></div></div>
+<div class="mob-footer-block"><a class="mob-apply-btn" href="admission.html">Подати документи</a></div></div>
+<!--/TOP-->
+
+
+
+
+
+
+
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Вступна кампанія 2026 відкрита</div>
+      <h1>Кримський університет<br>в&nbsp;центрі Києва</h1>
+      <p class="hero-para">Таврійський університет — один із найстаріших університетів України. Ми готуємо фахівців у галузях гуманітарних наук, права, журналістики, мистецтва та управління.</p>
+      <div class="hero-btns">
+        <a href="programs.html" class="btn-fill">Освітні програми</a>
+        <a href="about.html" class="btn-outline">Про університет</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE TABS -->
+<div class="tabbar-wrap">
+  <div class="container tabbar-inner">
+    <div class="tabs">
+      <button class="tab active" data-tab="vstup">Вступникам</button>
+      <button class="tab" data-tab="stud">Студентам</button>
+      <button class="tab" data-tab="sci">Науковцям</button>
+    </div>
+    <a href="about.html" class="tabs-more">Усі розділи →</a>
+  </div>
+</div>
+<div class="quicklinks-wrap">
+  <div class="container">
+    <div class="quicklinks active" data-content="vstup">
+      <a href="programs.html">Освітні програми</a>
+      <a href="admission.html">Умови вступу</a>
+      <a href="admission-rules.html">Вступна кампанія 2026</a>
+      <a href="student-governance.html#hurtozhytky">Проживання</a>
+      <a href="admissions-office.html">Контакти приймальної комісії</a>
+    </div>
+    <div class="quicklinks" data-content="stud">
+      <a href="study.html#rozklady-zaniat">Розклад занять</a>
+      <a href="study.html#vybirkovi-dystsypliny">Вибіркові дисципліни</a>
+      <a href="student-governance.html#studentske-samovriaduvannia">Студентське самоврядування</a>
+      <a href="student-governance.html#hurtozhytky">Гуртожиток</a>
+      <a href="payment.html">Реквізити для оплати</a>
+    </div>
+    <div class="quicklinks" data-content="sci">
+      <a href="admission.html#aspirantura-doktorantura">Аспірантура</a>
+      <a href="science.html#periodychni-vydannia">Наукові видання</a>
+      <a href="science-events.html">Конференції</a>
+      <a href="science.html">Наукові теми</a>
+      <a href="https://tnu.edu.ua/biblioteka/" target="_blank">Бібліотека</a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS + SIDEBAR -->
+<section class="main">
+  <div class="container">
+    <div class="main-grid">
+      <div class="news-col">
+        <div class="section-head">
+          <h2>Новини</h2>
+          <a href="news.html" class="section-link">Усі новини →</a>
+        </div>
+
+        <div id="home-news-items"></div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div>
+          <div class="box-head">Оголошення</div>
+          <div class="ann-item"><div class="ann-date">26 трав. 2026</div><a href="announcement.html?id=vstup-2026" class="ann-title">Прийом заяв вступної кампанії розпочинається 1 липня</a></div>
+          <div class="ann-item"><div class="ann-date">22 трав. 2026</div><a href="announcement.html?id=session-2026" class="ann-title">Графік перездач сесії оновлено в електронному деканаті</a></div>
+          <div class="ann-item"><div class="ann-date">20 трав. 2026</div><a href="announcement.html?id=summer-school-human-rights" class="ann-title">Відкрито реєстрацію на літню школу з прав людини</a></div>
+          <div class="ann-item"><div class="ann-date">15 трав. 2026</div><a href="announcement.html?id=daad-2026" class="ann-title">Стипендії DAAD для магістрантів — дедлайн 15 червня</a></div>
+          <div class="ann-item"><div class="ann-date">12 трав. 2026</div><a href="announcement.html?id=library-summer" class="ann-title">Бібліотека працює за літнім графіком з 1 червня</a></div>
+          <a href="announcements.html" class="box-link-all">Усі оголошення →</a>
+        </div>
+        <div>
+          <div class="box-head">Найближчі події</div>
+          <div class="ev-item">
+            <div class="ev-date"><div class="ev-day">04</div><div class="ev-month">черв</div></div>
+            <div><a href="event.html?id=digital-seminar" class="ev-title">Цифрові гуманітарні дослідження: відкритий семінар</a><div class="ev-loc">Корпус А, ауд. 312 · 14:00</div></div>
+          </div>
+          <div class="ev-item">
+            <div class="ev-date"><div class="ev-day">11</div><div class="ev-month">черв</div></div>
+            <div><a href="event.html?id=law-lecture" class="ev-title">Право в умовах війни — лекція проф. А. Мельник</a><div class="ev-loc">Велика аудиторія · 18:00</div></div>
+          </div>
+          <div class="ev-item">
+            <div class="ev-date"><div class="ev-day">18</div><div class="ev-month">черв</div></div>
+            <div><a href="event.html?id=crimea-album" class="ev-title">«Кримський альбом» — фотовиставка студентів</a><div class="ev-loc">Галерея ТНУ · 12:00–20:00</div></div>
+          </div>
+          <a href="calendar.html" class="box-link-all">Календар подій →</a>
+        </div>
+      </aside>
+
+      <!-- QUICK ACCESS -->
+      <div class="qa-section">
+        <div class="qa-label">Швидкий доступ</div>
+        <div class="qa-grid qa-photo">
+          <a href="http://library.tnu.edu.ua:8080/kvtnuv/DocumentSearchForm" target="_blank" class="qa-item" style="--ph:url('img/hero/museum.jpg')">Бібліотечний каталог <span class="qa-arr">→</span></a>
+          <a href="crimea-center.html" class="qa-item" style="--ph:url('img/hero/kyiv.jpg')">Центр реінтеграції Криму <span class="qa-arr">→</span></a>
+          <a href="student-governance.html" class="qa-item" style="--ph:url('https://tnu.edu.ua/wp-content/uploads/2026/05/c4035826-dfb4-4fb8-bb62-1dd.jpg')">Студентське самоврядування <span class="qa-arr">→</span></a>
+          <a href="payment.html" class="qa-item" style="--ph:url('img/hero/conference.jpg')">Реквізити для оплати <span class="qa-arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facts-band"><div class="container"><div class="fx-grid"><div class="fx"><b>1918</b><span>рік заснування Таврійського університету в Сімферополі</span></div><div class="fx"><b>2016</b><span>перший набір студентів після переїзду до Києва</span></div><div class="fx"><b>108</b><span>років історії університету</span></div></div></div></section>
+<!-- PROGRAMS PREVIEW -->
+<section class="programs-prev">
+  <div class="container">
+    <div class="prog-head">
+      <h2>Освітні програми</h2>
+      <input class="prog-search" type="text" placeholder="Пошук програми...">
+    </div>
+    <div class="prog-list">
+      <a href="programs.html" class="prog-row"><span class="prog-name">Українська філологія</span><span class="prog-inst">Інститут філології та журналістики</span></a>
+      <a href="programs.html" class="prog-row"><span class="prog-name">Журналістика</span><span class="prog-inst">Інститут філології та журналістики</span></a>
+      <a href="programs.html" class="prog-row"><span class="prog-name">Право</span><span class="prog-inst">Гуманітарний інститут</span></a>
+      <a href="programs.html" class="prog-row"><span class="prog-name">Психологія</span><span class="prog-inst">Гуманітарний інститут</span></a>
+      <a href="programs.html" class="prog-row"><span class="prog-name">Менеджмент</span><span class="prog-inst">Інститут управління</span></a>
+      <a href="programs.html" class="prog-row"><span class="prog-name">Комп'ютерні науки</span><span class="prog-inst">Інститут управління</span></a>
+      <a href="programs.html" class="prog-row"><span class="prog-name">Міжнародні відносини</span><span class="prog-inst">Гуманітарний інститут</span></a>
+      <a href="programs.html" class="prog-row"><span class="prog-name">Музичне мистецтво</span><span class="prog-inst">Академія ім. С. Прокоф'єва</span></a>
+    </div>
+    <a href="programs.html" class="prog-all">Усі програми (24) →</a>
+  </div>
+</section>
+
+<!--BOTTOM-->
+<footer class="footer"><div class="container"><div class="footer-grid">
+<div><div class="footer-logo"><div class="footer-logo-box">ТНУ</div><div><div class="footer-logo-top">Таврійський національний університет</div><div class="footer-logo-bot">імені В. І. Вернадського</div></div></div><p class="footer-desc">Кримський університет у центрі Києва.</p></div>
+<div><h4>Університет</h4><ul><li><a href="about.html">Про університет</a></li><li><a href="about.html#strukturni-pidrozdily">Структурні підрозділи</a></li><li><a href="leadership.html">Керівництво</a></li><li><a href="documents.html">Документи Університету</a></li></ul></div>
+<div><h4>Навчання</h4><ul><li><a href="programs.html">Освітні програми</a></li><li><a href="admission.html">Умови вступу</a></li><li><a href="study.html#rozklady-zaniat">Розклад</a></li><li><a href="https://tnu.edu.ua/biblioteka/" target="_blank" rel="noopener">Бібліотека</a></li></ul></div>
+<div><h4>Контакти</h4><ul><li><a href="contacts.html">вул. Джона Маккейна, 33, Київ</a></li><li><a href="tel:+380445290516">+38 (044) 529-05-16</a></li><li><a href="mailto:gendep@tnu.edu.ua">gendep@tnu.edu.ua</a></li><li><a href="https://tnu.edu.ua/poryadok-suprovodu-nadannya-dopomogi/" target="_blank" rel="noopener">Супровід осіб з інвалідністю</a></li></ul></div>
+</div><div class="footer-bottom"><span>© 2026 Таврійський національний університет імені В. І. Вернадського</span><span>Усі права захищені</span></div></div></footer>
+<!--/BOTTOM-->
+
+<script src="news-data.js"></script>
+<script>
+// Render homepage news from shared newsData
+(function(){
+  const el = document.getElementById('home-news-items');
+  if(!el || typeof newsData === 'undefined') return;
+  const imgStyle = 'width:100%;height:100%;object-fit:cover;display:block;';
+  const errHandler = "this.style.display='none'";
+  // featured (first item)
+  const f = newsData[0];
+  let html = `<article class="news-featured">
+    <div class="news-featured-img"><img src="${f.img}" alt="" style="${imgStyle}" onerror="${errHandler}"></div>
+    <div class="news-meta">${f.date} · ${f.category}</div>
+    <a href="article.html?id=${f.id}" class="news-featured-title">${f.title}</a>
+    <p class="news-excerpt">${f.excerpt}</p>
+  </article>`;
+  // smaller items (items 2 and 3)
+  newsData.slice(1, 3).forEach(n => {
+    html += `<article class="news-item">
+      <div class="news-item-img"><img src="${n.img}" alt="" style="${imgStyle}" onerror="${errHandler}"></div>
+      <div class="news-item-text">
+        <div class="news-meta">${n.date} · ${n.category}</div>
+        <a href="article.html?id=${n.id}" class="news-title">${n.title}</a>
+        <p class="news-excerpt" style="font-size:14px;color:var(--muted)">${n.excerpt}</p>
+      </div>
+    </article>`;
+  });
+  el.innerHTML = html;
+})();
+
+// Mega menu
+const navItems = document.querySelectorAll('.has-mega');
+const navbar = document.getElementById('navbar');
+let closeTimer;
+
+navItems.forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimer);
+    const id = 'menu-' + item.dataset.menu;
+    document.querySelectorAll('.mega-wrap').forEach(m => m.classList.remove('open'));
+    const menu = document.getElementById(id);
+    if (menu) menu.classList.add('open');
+    item.classList.add('open');
+  });
+  item.addEventListener('mouseleave', () => {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      document.querySelectorAll('.mega-wrap').forEach(m => m.classList.remove('open'));
+      navItems.forEach(i => i.classList.remove('open'));
+    }, 150);
+  });
+});
+
+document.querySelectorAll('.mega-wrap').forEach(menu => {
+  menu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+  menu.addEventListener('mouseleave', () => {
+    closeTimer = setTimeout(() => {
+      document.querySelectorAll('.mega-wrap').forEach(m => m.classList.remove('open'));
+      navItems.forEach(i => i.classList.remove('open'));
+    }, 150);
+  });
+});
+
+// Search panel
+const searchBtn = document.querySelector('.btn-search');
+const searchPanel = document.getElementById('searchPanel');
+const searchInput = document.getElementById('searchPanelInput');
+const searchClose = document.getElementById('searchPanelClose');
+function toggleSearch() {
+  const open = searchPanel.classList.toggle('open');
+  searchBtn.classList.toggle('active', open);
+  if (open) { searchPanel.style.top = document.getElementById('navbar').getBoundingClientRect().bottom + 'px'; setTimeout(() => searchInput.focus(), 50); }
+}
+function closeSearch() { searchPanel.classList.remove('open'); searchBtn.classList.remove('active'); }
+searchBtn.addEventListener('click', toggleSearch);
+searchClose.addEventListener('click', closeSearch);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
+// Audience tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === tab));
+    document.querySelectorAll('.quicklinks').forEach(ql => {
+      ql.classList.toggle('active', ql.dataset.content === target);
+    });
+  });
+});
+
+// Hero video — keep playing in Opera/Chromium (visibility API, PiP)
+(function(){
+  const v = document.querySelector('.hero-video');
+  if (!v) return;
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) v.play().catch(() => {});
+  });
+  v.addEventListener('pause', () => {
+    if (!document.hidden) v.play().catch(() => {});
+  });
+  v.addEventListener('leavepictureinpicture', () => {
+    v.play().catch(() => {});
+  });
+})();
+
+// Mobile menu
+const burger = document.getElementById('navBurger');
+const mobMenu = document.getElementById('mobMenu');
+const mobOverlay = document.getElementById('mobOverlay');
+const mobClose = document.getElementById('mobClose');
+function openMob() { mobMenu.classList.add('open'); mobOverlay.classList.add('open'); burger.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMob() { mobMenu.classList.remove('open'); mobOverlay.classList.remove('open'); burger.classList.remove('open'); document.body.style.overflow = ''; }
+burger.addEventListener('click', openMob);
+mobClose.addEventListener('click', closeMob);
+mobOverlay.addEventListener('click', closeMob);
+document.querySelectorAll('.mob-item-head[data-mob]').forEach(h => {
+  h.addEventListener('click', () => {
+    const sub = document.getElementById('mob-' + h.dataset.mob);
+    const wasOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-item-head').forEach(x => x.classList.remove('open'));
+    if (!wasOpen) { sub.classList.add('open'); h.classList.add('open'); }
+  });
+});
+</script>
+<script src="site.js"></script>
+<script src="accent.js"></script>
+</body>
+</html>
