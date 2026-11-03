@@ -47,5 +47,20 @@
 .qa-photo .qa-item{position:relative;min-height:150px;align-items:flex-end;justify-content:flex-start;padding:20px;border:0;border-bottom:3px solid var(--gold);border-radius:6px;color:#fff;font-size:15px;font-weight:600;background:linear-gradient(rgba(28,43,74,.35),rgba(28,43,74,.86)),var(--ph) center/cover no-repeat,var(--navy)}
 .qa-photo .qa-item .qa-arr{color:var(--gold)}
 .qa-photo .qa-item:hover{background:linear-gradient(rgba(28,43,74,.25),rgba(28,43,74,.8)),var(--ph) center/cover no-repeat,var(--navy)}
+/* Відео на головній: рівно екран мінус шапка, без білих смуг і без заходу під наступний блок */
+.hero{height:calc(100vh - var(--top-h,95px));height:calc(100svh - var(--top-h,95px));min-height:420px!important;margin-bottom:0}
+/* Сторінка «Усі розділи» */
+.sm-hero .big-search{margin:18px 0 0;max-width:640px}
+.sm-sec{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;padding:32px 0;border-top:1px solid var(--border)}
+.sm-sec:first-child{border-top:0}
+.sm-sec h2{position:relative;padding-top:14px;font-size:22px;font-weight:700;color:var(--text);line-height:1.25}
+.sm-sec h2::before{content:"";position:absolute;left:0;top:0;width:40px;height:3px;background:var(--gold)}
+.sm-pages{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:28px 32px}
+.sm-t{display:block;font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.35}
+.sm-page ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.sm-page li a{font-size:14px;color:var(--muted);line-height:1.4}
+.sm-t:hover,.sm-page li a:hover{color:var(--text);text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:4px}
+@media(max-width:768px){.tabs-more{display:block!important;align-self:flex-end;padding:8px 0 10px}}
+@media(max-width:900px){.sm-sec{grid-template-columns:minmax(0,1fr);gap:14px;padding:24px 0}.sm-pages{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:20px 20px}}
 @media(max-width:900px){.facts-band{padding-top:36px;padding-bottom:48px}.fx-grid{gap:14px}.fx{padding-top:12px}.fx b,.section-block .fx b{font-size:30px;letter-spacing:-.8px}.fx span{font-size:12.5px}.page-hero::after{display:none}.qa-photo .qa-item{min-height:110px;font-size:13px;padding:14px}}
 @media(prefers-reduced-motion:reduce){.page-hero[style]::before,.mega-wrap.open{animation:none}.rv{opacity:1;transform:none;transition:none}.ccard:hover,.qa-item:hover{transform:none}.nav-item>a::after,.nav-item>button::after{transition:none}}
