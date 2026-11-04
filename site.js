@@ -47,6 +47,10 @@
   if(document.body.hasAttribute('data-tpl')){
     qa('.acc-btn').forEach(function(b){ b.addEventListener('click',function(){ b.classList.toggle('open'); b.setAttribute('aria-expanded',b.classList.contains('open')); b.nextElementSibling.classList.toggle('open'); }); });
     qa('form[data-demo]').forEach(function(f){ f.addEventListener('submit',function(e){ e.preventDefault(); var n=f.querySelector('.form-note'); if(n) n.hidden=false; }); });
+    // QR-коди Дії: кожен відкривається окремо, великим
+    var dlg=q('#qrDlg');
+    if(dlg){ qa('[data-qr]').forEach(function(b){ b.addEventListener('click',function(){ q('#qrDlgImg').src=b.dataset.qr; q('#qrDlgImg').alt='QR-код: '+b.dataset.n; q('#qrDlgT').textContent=b.dataset.n; if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); }); });
+      dlg.addEventListener('click',function(e){ if(e.target===dlg||e.target.closest('.qr-dlg-x')) dlg.close(); }); }
     // Пошук серед файлів на сторінці
     qa('[data-filter]').forEach(function(inp){ inp.addEventListener('input',function(){
       var v=inp.value.trim().toLowerCase(), root=q(inp.dataset.filter), total=0;

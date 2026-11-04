@@ -210,6 +210,38 @@ button{font-family:inherit;cursor:pointer;}
 .page-hero[style]{background:linear-gradient(rgba(28,43,74,.74),rgba(28,43,74,.74)),var(--hero-img) var(--hero-pos,center)/cover no-repeat var(--navy)}
 .page-hero[style] .hero-badge{color:rgba(255,255,255,.88);background:rgba(255,255,255,.16)}
 .page-hero[style] .hero-slogan{color:rgba(255,255,255,.85)}
+/* Хто відповідає за наповнення вкладки */
+.resp{margin-top:22px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
+.resp b{font-weight:600;color:var(--text)}
+/* Стан файлу: зелений відкривається, червоний не відкривається */
+.doc-link.ok .doc-icon{background:#E7F5EC}.doc-link.ok .doc-icon svg{stroke:#1F8A4C}
+.doc-link.bad .doc-icon{background:#FDECEC}.doc-link.bad .doc-icon svg{stroke:#C62828}
+.doc-link.bad>span:last-child{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(198,40,40,.5)}
+.doc-legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 14px;font-size:13px;color:var(--muted)}
+.doc-legend span{display:inline-flex;align-items:center;gap:6px}
+.doc-legend i{width:10px;height:10px;border-radius:50%;background:#1F8A4C}
+.doc-legend i.r{background:#C62828}
+/* QR-коди: плитка відкриває код окремо */
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.qr-btn{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:14px;border:1px solid var(--border);border-radius:6px;background:#fff;text-align:left;font-size:14px;font-weight:600;color:var(--text);line-height:1.35}
+.qr-btn:hover{border-color:var(--navy)}
+.qr-btn img{width:64px;height:64px}
+.qr-btn small{font-weight:400;font-size:12.5px;color:var(--muted)}
+.qr-dlg{margin:auto;border:0;border-radius:8px;padding:24px;max-width:min(420px,calc(100vw - 32px));width:100%;text-align:center}
+.qr-dlg::backdrop{background:rgba(28,43,74,.6)}
+.qr-dlg h3{font-size:18px;margin:0 30px 14px}
+.qr-dlg img{width:100%;max-width:320px;height:auto;margin:0 auto}
+.qr-dlg-x{position:absolute;top:10px;right:12px;width:32px;height:32px;border:0;background:none;font-size:26px;line-height:1;color:var(--muted)}
+.qr-dlg-wrap{position:relative}
+/* Питання і відповіді */
+.faq .acc-body p{padding:4px 18px 14px;margin:0;font-size:15px}
+.ask{margin-top:22px}
+.ask h3{font-size:17px;margin-bottom:6px}
+/* Списки лабораторій і людей */
+.sub-h{font-size:16px;font-weight:700;margin:22px 0 8px}
+.person{padding:12px 0;border-bottom:1px solid var(--border)}
+.person b{display:block;font-size:15.5px}
+.person span{font-size:14px;color:var(--muted)}
 
 /* Посилання в тексті тепер чорні, тому підкреслені */
 .plain-list a,.page-content p a:not([class]),.sec p a:not([class]){text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px}

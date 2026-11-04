@@ -136,6 +136,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--navy);outline-offse
 .breadcrumb-bar{background:#fff;border-bottom:1px solid var(--border);}
 .breadcrumb-bar .breadcrumb{height:39px;border:none;gap:0;}
 .breadcrumb .bc-sep,.breadcrumb span.sep{margin:0 6px;}
+.f-socs{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;}
+.f-soc{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(255,255,255,.12);transition:background .15s;}
+a.f-soc:hover{background:rgba(255,255,255,.26);}
+.f-soc.off{opacity:.45;cursor:help;}
 @media(max-width:1100px){.nav-links{display:none;}.nav-burger{display:flex;}}
 @media(max-width:768px){.container{padding:0 16px;}.u-long{display:none;}}
 @media(min-width:1440px){.container{max-width:1360px;}}
