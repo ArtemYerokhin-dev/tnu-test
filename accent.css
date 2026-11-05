@@ -137,3 +137,6 @@ body{background:#fff}
 .qa-photo .qa-item .qa-arr{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;margin-left:8px;border-radius:50%;background:var(--gold);color:var(--navy)}
 .news-featured-img,.news-item-img,.news-featured-img img,.news-item-img img{border-radius:14px;overflow:hidden}
 @media(prefers-reduced-motion:reduce){.page-hero[style]::before,.mega-wrap.open{animation:none}.rv{opacity:1;transform:none;transition:none}.ccard:hover,.qa-item:hover{transform:none}.nav-item>a::after,.nav-item>button::after{transition:none}}
+/* Усі кнопки й клікабельні елементи прямокутні, як шапка сайту (6px) */
+.nav-list li a,.doc-link,.qa-photo .qa-item,.prog-row,.stage,.big-search,.prog-search,.search-panel-input,.btn,.btn-main,.btn-out,.btn-apply,.btn-fill,.btn-outline,.mob-apply-btn,.cta a,.chip,.tab{border-radius:6px!important}
+.tab{border-radius:0!important}
