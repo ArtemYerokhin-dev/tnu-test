@@ -85,19 +85,9 @@ body{background:#fff}
 /* М'які форми: заокруглені блоки на світлому тлі замість прямокутників у рамках. Кольори ті самі: темно-синій і золото */
 :root{--soft:#F3F5F9;--r:14px}
 .hero-badge,.page-hero .hero-badge{border-radius:999px}
-.btn,.btn-main,.btn-out,.btn-apply,.btn-fill,.btn-outline,.mob-apply-btn,.cta a{border-radius:999px!important}
-.btn-main,.btn-out,.btn{padding-left:22px;padding-right:22px}
 .field,.form input,.form select,.form textarea{border-radius:12px}
 .form textarea{padding-top:10px}
-.chip{border-radius:999px}
 .big-search,.prog-search,.search-panel-input{border-radius:999px}
-/* Вкладки сторінок: «пігулки», активна темно-синя */
-.tabs-bar{border-bottom:0;box-shadow:0 1px 0 var(--border)}
-.tabs{gap:6px;padding:9px 0}
-.tab,.tab:first-child{height:38px;padding:0 18px;border:0!important;border-radius:999px;transition:background .15s,color .15s}
-.tab:hover{background:var(--soft)}
-.tab.on,.tab.active{background:var(--navy);color:#fff!important}
-.tabbar-inner{height:56px}
 /* Бічне меню розділу: без рамки, активний пункт з золотою крапкою */
 .sidebar-card{border:0;border-radius:var(--r);background:var(--soft);padding:6px}
 .sidebar-card-head{border-bottom:0;padding:12px 14px 6px}
