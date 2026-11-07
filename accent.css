@@ -245,3 +245,7 @@ a:hover .arr-i{transform:translateX(4px)}
 .apply-box>*{position:relative}
 .apply-box-btn{background:var(--gold);color:var(--navy)}
 .apply-box-btn:hover{background:#F0C55E}
+/* Файли: зелена позначка — актуальна інформація, червона — неактуальна */
+.doc-link.cur .doc-icon{background:#E7F5EC}.doc-link.cur .doc-icon svg{stroke:#1F8A4C}
+.doc-link.old .doc-icon{background:#FDECEC}.doc-link.old .doc-icon svg{stroke:#C62828}
+.doc-link.old>span:last-child{color:var(--muted)}
