@@ -151,3 +151,10 @@ a.soc:hover .soc-arr{background:var(--gold)}
 .qa-item:hover{text-decoration:none!important}
 .qa-item:hover .qa-t{text-decoration:underline;text-underline-offset:3px}
 .qa-item .qa-arr{text-decoration:none!important}
+/* Тонка стрілка лініями замість символу «→»: товщина як у літер Inter, при наведенні зсувається праворуч */
+.arr-i{display:inline-block;width:1.05em;height:1.05em;vertical-align:-.17em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+a:hover .arr-i{transform:translateX(4px)}
+.qa-photo .qa-item .qa-arr{width:auto;height:auto;margin-left:10px;border-radius:0;background:none;color:var(--gold)}
+.qa-arr .arr-i,.soc-arr .arr-i{width:20px;height:20px;vertical-align:middle}
+.soc-arr,a.soc:hover .soc-arr{width:auto;height:auto;background:none;color:var(--navy)}
+@media(prefers-reduced-motion:reduce){a:hover .arr-i{transform:none}}

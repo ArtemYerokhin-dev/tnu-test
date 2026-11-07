@@ -124,7 +124,7 @@ button{font-family:inherit;cursor:pointer;}
   <div class="container">
     <div class="more-head">
       <h2>Більше новин</h2>
-      <a href="news.html" class="more-link">Усі новини →</a>
+      <a href="news.html" class="more-link">Усі новини <svg class="arr-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="more-grid" id="more-grid"></div>
   </div>
@@ -212,7 +212,7 @@ button{font-family:inherit;cursor:pointer;}
         <div class="more-meta">${x.category} · ${x.date}</div>
         <a href="article.html?id=${x.id}" class="more-title">${x.title}</a>
         <p class="more-excerpt">${x.excerpt}</p>
-        <a href="article.html?id=${x.id}" class="more-read">Читати →</a>
+        <a href="article.html?id=${x.id}" class="more-read">Читати <svg class="arr-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   `).join('');

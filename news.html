@@ -146,7 +146,7 @@ document.getElementById('featured-grid').innerHTML = newsData.slice(0,2).map(n =
       <div class="nf-meta">${n.category} · ${n.date}</div>
       <span class="nf-title">${n.title}</span>
       <p class="nf-excerpt">${trunc(n.excerpt)}</p>
-      <span class="nf-read">Читати →</span>
+      <span class="nf-read">Читати <svg class="arr-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </div>
   </a>
 `).join('');
@@ -159,7 +159,7 @@ document.getElementById('news-list').innerHTML = newsData.slice(2).map(n => `
       <div class="nl-meta">${n.category} · ${n.date}</div>
       <span class="nl-title">${n.title}</span>
       <p class="nl-excerpt">${trunc(n.excerpt)}</p>
-      <span class="nl-read">Читати →</span>
+      <span class="nl-read">Читати <svg class="arr-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </div>
   </a>
 `).join('');
