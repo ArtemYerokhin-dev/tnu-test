@@ -175,3 +175,73 @@ a:hover .arr-i{transform:translateX(4px)}
 @media(max-width:640px){.hist-ph{min-height:190px;padding:22px 20px}.hist-ph h2{font-size:24px}.hist-tx{padding:24px 20px 26px}.hist-tx p{font-size:16px}.hist-nums{grid-template-columns:repeat(2,minmax(0,1fr));margin:22px 0;gap:18px 16px}.hist-nums b{font-size:32px;letter-spacing:-.8px}.hist-nums span{font-size:13.5px}.hist-btn{align-self:stretch;justify-content:center}}
 /* Шрифт більший, тож меню в шапці ховається в бургер раніше: до 1200px замість 1100px */
 @media(max-width:1200px){.nav-links{display:none}.nav-burger{display:flex}}
+/* Каталог освітніх програм: пошук, рівні, інститути й картки на м'якому тлі */
+.pg-tools{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;margin-bottom:26px}
+.pg-tools .big-search{flex:1 1 380px;margin:0;max-width:none}
+.pg-chips{display:flex;flex-wrap:wrap;gap:8px}
+.pg-chips .chip{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border:0;border-radius:6px;background:var(--soft);color:var(--text);font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s,color .15s}
+.pg-chips .chip:hover{background:#E8ECF3}
+.pg-chips .chip span{font-size:14px;font-weight:500;color:var(--muted)}
+.pg-chips .chip.on{background:var(--navy);color:#fff}.pg-chips .chip.on span{color:rgba(255,255,255,.7)}
+.pg-layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:32px;align-items:start}
+.pg-side{position:sticky;top:90px}
+.pg-inst li a{display:flex;align-items:center;gap:10px;cursor:pointer;line-height:1.35}
+.pg-inst li a b{margin-left:auto;font-size:14px;font-weight:500;color:var(--muted)}
+.pg-inst li.dim a{opacity:.45}
+.pg-sel{display:none}
+.pg-meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:15px;color:var(--muted)}
+.pg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pc{display:flex;flex-direction:column;gap:6px;padding:20px 22px;border-radius:var(--r);background:var(--soft);transition:background .2s,box-shadow .2s}
+.pc:hover{background:#fff;box-shadow:0 10px 24px rgba(28,43,74,.1),inset 0 0 0 1px var(--border)}
+.pc[hidden]{display:none}
+.pc-top{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pc-date{font-weight:500;letter-spacing:0;text-transform:none;font-size:13px}
+.pc-t{margin-top:4px;font-size:19px;font-weight:700;line-height:1.3;color:var(--text)}
+.pc-i{font-size:15px;line-height:1.4;color:var(--muted)}
+.pc-act{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-top:auto;padding-top:12px}
+.pc-btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:6px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;text-decoration:none;transition:background .15s}
+.pc-btn:hover{background:#26375C}
+.pc-more{font-size:15px;font-weight:600;color:var(--text);text-decoration:none}
+.pc-more:hover{text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:4px}
+.pc-old{font-size:15px}
+.pc-old summary,.dp summary{list-style:none;cursor:pointer}
+.pc-old summary::-webkit-details-marker,.dp summary::-webkit-details-marker{display:none}
+.pc-old summary{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.pc-old summary::after,.dp summary::after{content:"";flex:none;width:7px;height:7px;border-right:1.7px solid currentColor;border-bottom:1.7px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.pc-old[open] summary::after,.dp[open] summary::after{transform:translateY(1px) rotate(225deg)}
+.pc-old div{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px}
+.pc-old div a{color:var(--text);text-decoration:underline;text-decoration-color:rgba(28,43,74,.25);text-underline-offset:3px}
+.pc-old div a:hover{text-decoration-color:var(--gold)}
+.pg-empty{padding:28px;border-radius:var(--r);background:var(--soft);text-align:center;color:var(--muted)}
+.pg-src{margin-top:14px;font-size:14px;line-height:1.5;color:var(--muted)}
+.pg-src a{color:var(--text);text-decoration:underline;text-underline-offset:3px}
+/* Документи й проєкти програм: розгортні м'які блоки, як на інших сторінках */
+.dp-lvl{margin:34px 0 4px;font-size:21px;font-weight:700;color:var(--text)}
+.dp-lvl:first-of-type{margin-top:18px}
+.dp-inst{margin:20px 0 8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dp{margin-bottom:8px;border-radius:var(--r);background:var(--soft);transition:background .2s,box-shadow .2s}
+.dp summary{display:flex;align-items:center;gap:12px;padding:14px 18px;font-size:16px;font-weight:600;line-height:1.4;color:var(--text)}
+.dp summary small{margin-left:auto;font-size:14px;font-weight:500;color:var(--muted);white-space:nowrap}
+.dp[open]{background:#fff;box-shadow:0 8px 24px rgba(28,43,74,.08),inset 0 0 0 1px var(--border)}
+.dp-files{padding:0 18px 10px}
+.pj{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:8px;padding:14px 18px;border-radius:var(--r);background:var(--soft)}
+.pj>span{flex:1 1 280px;font-size:16px;font-weight:600;line-height:1.4;color:var(--text)}
+.pj-b{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;background:var(--navy);color:#fff;font-size:15px;font-weight:600;text-decoration:none}
+.pj-b:hover{background:#26375C}
+.pj-l{font-size:15px;font-weight:600;color:var(--text);text-decoration:underline;text-decoration-color:rgba(28,43,74,.25);text-underline-offset:3px}
+.pj-l:hover{text-decoration-color:var(--gold)}
+@media(max-width:900px){.pg-layout{grid-template-columns:minmax(0,1fr);gap:14px}.pg-side{position:static}.pg-side .sidebar-card{display:none}.pg-sel{display:block;width:100%;height:46px;padding:0 14px;border:0;border-radius:6px;background:var(--soft);color:var(--text);font-family:inherit;font-size:16px}.pg-src{display:none}}
+@media(max-width:700px){.pg-grid{grid-template-columns:minmax(0,1fr)}.pc{padding:16px 18px}.pc-t{font-size:18px}.pg-chips{gap:6px}.pg-chips .chip{height:40px;padding:0 12px}.dp summary,.pj{padding:12px 14px}.dp-files{padding:0 14px 8px}}
+/* Сторінка програми: розгортні блоки окремо на м'якому тлі без спільної рамки; бічні блоки в стилі сайту */
+.acc-group{display:flex;flex-direction:column;gap:8px;border:0;border-radius:0;overflow:visible}
+.acc-item{border:0!important;border-radius:var(--r);background:var(--soft);overflow:hidden;transition:background .2s,box-shadow .2s}
+.acc-group .acc-btn,.acc-group .acc-btn.open{border-left:0;background:transparent}
+.acc-group .acc-btn:hover{background:rgba(28,43,74,.04)}
+.acc-item:has(.acc-btn.open){background:#fff;box-shadow:0 8px 24px rgba(28,43,74,.08),inset 0 0 0 1px var(--border)}
+.acc-body{border-left:0!important;background:transparent}
+.pdf-card,.contact-box{border:0;border-radius:var(--r);background:var(--soft)}
+.apply-box{position:relative;overflow:hidden;border-radius:var(--r)}
+.apply-box::after{content:"";position:absolute;right:-62px;top:-62px;width:120px;height:120px;border-radius:50%;border:2px solid var(--gold);opacity:.55;pointer-events:none}
+.apply-box>*{position:relative}
+.apply-box-btn{background:var(--gold);color:var(--navy)}
+.apply-box-btn:hover{background:#F0C55E}
